@@ -1,0 +1,4 @@
+runpacker.*
+docker_image.json
+
+/packer_*/**/*
