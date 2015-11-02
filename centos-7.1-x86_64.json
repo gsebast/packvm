@@ -110,7 +110,7 @@
       "type": "vagrant",
       "only": ["virtualbox"],
       "compression_level": "9",
-      "output": "./packer_builds/{{.Provider}}/{{user `template`}}/{{user `template`}}_provisionerless.box"
+      "output": "./packer_builds/{{.Provider}}/{{user `template`}}/{{user `template`}}.box"
     }
   ]
 }
