@@ -1,16 +1,16 @@
 {
   "variables": {
-    "box_basename": "centos-7.1",
-    "template": "centos-7.1-x86_64",
-    "ks_path": "centos-7.1/ks.cfg",
+    "box_basename": "centos-7.2",
+    "template": "centos-7.2-x86_64",
+    "ks_path": "centos-7.2/ks.cfg",
     "headless": "true",
     "metadata": "floppy/dummy_metadata.json",
 
     "mirror": "http://mirrors.kernel.org/centos",
-    "mirror_directory": "7.1.1503/isos/x86_64",
+    "mirror_directory": "7.2.1511/isos/x86_64",
 
-    "iso_name": "CentOS-7-x86_64-DVD-1503-01.iso",
-    "iso_checksum": "85bcf62462fb678adc0cec159bf8b39ab5515404bc3828c432f743a1b0b30157",
+    "iso_name": "CentOS-7-x86_64-DVD-1511.iso",
+    "iso_checksum": "907e5755f824c5848b9c8efbb484f3cd945e93faa024bad6ba875226f9683b16",
     "iso_checksum_type": "sha256",
 
     "http_root_context": "http",
