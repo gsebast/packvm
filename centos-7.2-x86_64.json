@@ -1,5 +1,6 @@
 {
   "variables": {
+    "name": "centos-7.2",
     "box_basename": "centos-7.2",
     "template": "centos-7.2-x86_64",
     "ks_path": "centos-7.2/ks.cfg",
@@ -24,15 +25,14 @@
 
     "vbox_provider": "virtualbox",
 
-    "http_proxy": "{{env `http_proxy`}}",
-    "https_proxy": "{{env `https_proxy`}}",
-    "no_proxy": "{{env `no_proxy`}}",
+    "http_proxy": "",
+    "https_proxy": "",
+    "no_proxy": "",
 
     "build_timestamp": "{{isotime \"20060102150405\"}}",
     "git_revision": "__unknown_git_revision__",
     "version": "2.1.TIMESTAMP"
   },
-
 
   "builders": [
     {
@@ -76,13 +76,7 @@
     }
   ],
 
-
   "provisioners": [
-    {
-      "type": "file",
-      "destination": "/tmp/bento-metadata.json",
-      "source": "{{user `metadata`}}"
-    },
     {
       "environment_vars": [
         "HOME_DIR=/home/vagrant",
@@ -93,7 +87,6 @@
       "type": "shell",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E sh -eux '{{.Path}}'",
       "scripts": [
-        "scripts/common/metadata.sh",
         "scripts/common/sshd.sh",
         "scripts/centos/networking.sh",
         "scripts/common/vagrant.sh",
@@ -103,7 +96,6 @@
       ]
     }
   ],
-
 
   "post-processors": [
     {
