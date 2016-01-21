@@ -3,6 +3,11 @@
     "name": "centos-7.2",
     "box_basename": "centos-7.2",
     "template": "centos-7.2-x86_64",
+
+    "build_timestamp": "{{isotime \"20060102150405\"}}",
+    "git_revision": "__unknown_git_revision__",
+    "version": "2.1.TIMESTAMP",
+
     "ks_path": "centos-7.2/ks.cfg",
     "headless": "true",
     "metadata": "floppy/dummy_metadata.json",
@@ -27,11 +32,7 @@
 
     "http_proxy": "",
     "https_proxy": "",
-    "no_proxy": "",
-
-    "build_timestamp": "{{isotime \"20060102150405\"}}",
-    "git_revision": "__unknown_git_revision__",
-    "version": "2.1.TIMESTAMP"
+    "no_proxy": ""
   },
 
   "builders": [
@@ -47,7 +48,7 @@
 
       "vm_name": "{{user `template`}}",
       "virtualbox_version_file": ".vbox_version",
-      "output_directory": "./{{user `box_basename`}}_provisionerless_{{user `vbox_provider`}}",
+      "output_directory": "./{{user `box_basename`}}_{{user `vbox_provider`}}",
       "headless": "{{user `headless`}}",
       "disk_size": "{{user `hdd_size`}}",
       "hard_drive_interface": "sata",
@@ -62,9 +63,24 @@
       "ssh_wait_timeout": "3600s",
 
       "vboxmanage": [
-        ["modifyvm", "{{.Name}}", "--cpus", "2"],
-        ["modifyvm", "{{.Name}}", "--memory", "512"],
-        ["modifyvm", "{{.Name}}", "--vram", "32"]
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--cpus",
+          "2"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--memory",
+          "512"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--vram",
+          "32"
+        ]
       ],
 
       "boot_wait": "10s",
@@ -102,7 +118,7 @@
       "type": "vagrant",
       "only": ["virtualbox"],
       "compression_level": "9",
-      "output": "./packer_builds/{{.Provider}}/{{user `template`}}/{{user `template`}}.box"
+      "output": "./packer_builds/{{.Provider}}/{{user `box_basename`}}/{{user `template`}}.box"
     }
   ]
 }
