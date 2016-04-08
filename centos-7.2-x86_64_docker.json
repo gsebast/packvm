@@ -2,7 +2,7 @@
   "builders": [
     {
       "type": "docker",
-      "image": "centos",
+      "image": "alpine",
       "run_command": [
         "-d",
         "-i",
