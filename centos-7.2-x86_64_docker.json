@@ -17,6 +17,10 @@
   "provisioners":
   [
     {
+      "type": "shell",
+      "inline": ["yum -y install initscripts; yum clean all"]
+    }
+    {
       "type": "chef-solo",
       "skip_install": "false",
       "prevent_sudo": "true",
