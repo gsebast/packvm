@@ -1,0 +1,40 @@
+{
+  "builders": [
+    {
+      "type": "docker",
+      "image": "centos:7.2.1511",
+      "commit": true,
+      "run_command": [
+        "--env=container docker",
+        "-d",
+        "-i",
+        "-t",
+        "--volume=/sys/fs/cgroup",
+        "{{.Image}}",
+        "/usr/sbin/init"
+      ]
+    }
+  ],
+
+  "provisioners":
+  [
+    {
+      "type": "shell",
+      "inline": ["yum -y install initscripts; yum clean all"]
+    }
+  ],
+
+  "post-processors":
+  [
+    [
+      {
+        "type": "docker-tag",
+        "repository": "gsebast/centos7-systemd",
+        "tag": "0.1"
+      },
+      {
+        "type": "docker-push"
+      }
+    ]
+  ]
+}
