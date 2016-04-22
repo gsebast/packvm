@@ -1,8 +1,15 @@
 {
+  "variables": {
+    "src_image_name": "centos",
+    "src_image_tag": "7.2.1511",
+    "dst_image_name": "centos7.2.1511_systemd",
+    "dst_image_tag": "0.1"
+  },
+
   "builders": [
     {
       "type": "docker",
-      "image": "centos:7.2.1511",
+      "image": "{{user `src_image_name`}}:{{user `src_image_tag`}}",
       "commit": true,
       "run_command": [
         "--env=container docker",
@@ -29,8 +36,8 @@
     [
       {
         "type": "docker-tag",
-        "repository": "gsebast/centos7-systemd",
-        "tag": "0.1"
+        "repository": "gsebast/{{user `dst_image_name`}}",
+        "tag": "{{user `dst_image_tag`}}"
       },
       {
         "type": "docker-push"
