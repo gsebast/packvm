@@ -1,0 +1,50 @@
+{
+  "variables": {
+    "base_image_name": "centos",
+    "base_image_tag": "7.2.1511",
+
+    "dest_repository": "gsebast:5000",
+    "src_repository": "",
+
+    "image_name": "chefdk",
+    "image_tag": "1",
+    "chefdk_version": "0.13.21"
+  },
+
+  "builders": [
+    {
+      "type": "docker",
+      "image": "{{if {{user `src_repository`}}}}{{user `src_repository`}}/{{end}}{{user `base_image_name`}}:{{user `base_image_tag`}}",
+      "commit": true,
+      "run_command": [
+        "-d",
+        "-i",
+        "-t",
+        "{{.Image}}",
+        "/bin/bash"
+      ]
+    }
+  ],
+
+  "provisioners":
+  [
+    {
+      "type": "shell",
+      "inline": ["curl -L https://omnitruck.chef.io/install.sh | bash -s -- -v {{user `chefdk_version`}} -P chefdk"]
+    }
+  ],
+
+  "post-processors":
+  [
+    [
+      {
+        "type": "docker-tag",
+        "repository": "{{user `dest_repository`}}/{{user `image_name`}}",
+        "tag": "{{user `chefdk_version`}}-{{user `image_tag`}}"
+      },
+      {
+        "type": "docker-push"
+      }
+    ]
+  ]
+}
