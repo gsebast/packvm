@@ -1,14 +1,20 @@
 {
+  "variables": {
+    "src_image_name": "centos7.2.1511_systemd",
+    "src_image_tag": "0.1",
+    "dst_image_name": "centos7.2.1511_systemd_jdk-8u91",
+    "dst_image_tag": "0.1"
+  },
+
   "builders": [
     {
       "type": "docker",
-      "image": "centos:7.2.1511",
+      "image": "{{user `src_image_name`}}:{{user `src_image_tag`}}",
       "commit": true,
       "run_command": [
         "-d",
         "-i",
         "-t",
-        "--expose=8080"
         "{{.Image}}",
         "/usr/sbin/init"
       ]
@@ -28,17 +34,19 @@
           "oracle": {
             "accept_oracle_download_terms": "true"
           },
-          "jdk_version": "8"
-        },
-        "jenkins": {
-          "master": {
-            "install_method": "package"
+          "jdk_version": "8",
+          "jdk": {
+            "8": {
+              "x86_64": {
+                "url": "http://download.oracle.com/otn-pub/java/jdk/8u91-b14/jdk-8u91-linux-x64.tar.gz",
+                "checksum": "6f9b516addfc22907787896517e400a62f35e0de4a7b4d864b26b61dbe1b7552"
+              }
+            }
           }
         }
       },
       "run_list": [
-        "recipe[java]",
-        "recipe[jenkins::master]"
+        "recipe[java]"
       ]
     }
   ],
@@ -48,8 +56,8 @@
     [
       {
         "type": "docker-tag",
-        "repository": "gsebast/centos7-jenkins",
-        "tag": "0.1"
+        "repository": "gsebast/{{user `dst_image_name`}}",
+        "tag": "{{user `dst_image_tag`}}"
       },
       {
         "type": "docker-push"
