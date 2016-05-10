@@ -8,7 +8,7 @@
 
     "image_name": "chef-client",
     "image_tag": "1",
-    "chef_version": "12.9.38"
+    "chef_version": "12.9.41"
   },
 
   "builders": [
