@@ -47,7 +47,7 @@
     },
     {
       "type": "shell",
-      "inline": ["berks vendor /tmp/chef/cookbooks -b /tmp/berkshelf/Berksfile --only='2.0-1.1' -c /tmp/berkshelf/config.json"]
+      "inline": ["berks vendor /tmp/chef/cookbooks -b /tmp/berkshelf/Berksfile --only='2.3' -c /tmp/berkshelf/config.json"]
     }
   ],
 

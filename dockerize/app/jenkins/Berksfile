@@ -1,6 +1,6 @@
 source 'https://supermarket.chef.io'
 
-group :'2.0-1.1' do
+group :'2.3' do
   cookbook 'java', '= 1.39.0'
   cookbook 'jenkins', '= 2.5.0'
 end
