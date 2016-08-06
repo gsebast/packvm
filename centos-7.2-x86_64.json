@@ -23,7 +23,7 @@
     "http_pMin": "9001",
     "http_pMax": "9009",
 
-    "hdd_size": "8192",
+    "hdd_size": "16384",
 
     "username": "vagrant",
     "password": "vagrant",
