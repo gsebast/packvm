@@ -1,19 +1,12 @@
 #!/bin/sh -eux
 
-if [ -s /etc/oracle-release ]; then
-  distro='oracle'
-elif [ -s /etc/enterprise-release ]; then
-  distro='oracle'
-elif [ -s /etc/redhat-release ]; then
-  # should ouput 'centos' OR 'red hat'
-  distro=`cat /etc/redhat-release | sed 's/^\(CentOS\|Red Hat\).*/\1/i' | tr '[:upper:]' '[:lower:]'`
-fi
-
+# should output one of 'redhat' 'centos' 'oraclelinux'
+distro="`rpm -qf --queryformat '%{NAME}' /etc/redhat-release | cut -f 1 -d '-'`"
 
 # Remove development and kernel source packages
 yum -y remove gcc cpp kernel-devel kernel-headers perl;
 
-if [ "$distro" != 'red hat' ]; then
+if [ "$distro" != 'redhat' ]; then
   yum -y clean all;
 fi
 
@@ -29,5 +22,37 @@ for ndev in `ls -1 /etc/sysconfig/network-scripts/ifcfg-*`; do
         sed -i '/^UUID/d' "$ndev";
     fi
 done
+
+# new-style network device naming for centos7
+if grep -q -i "release 7" /etc/redhat-release ; then
+  # radio off & remove all interface configration
+  nmcli radio all off
+  /bin/systemctl stop NetworkManager.service
+  for ifcfg in `ls /etc/sysconfig/network-scripts/ifcfg-* |grep -v ifcfg-lo` ; do
+    rm -f $ifcfg
+  done
+  rm -rf /var/lib/NetworkManager/*
+
+  echo "==> Setup /etc/rc.d/rc.local for CentOS7"
+  cat <<_EOF_ | cat >> /etc/rc.d/rc.local
+#BENTO-BEGIN
+LANG=C
+# delete all connection
+for con in \`nmcli -t -f uuid con\`; do
+  if [ "\$con" != "" ]; then
+    nmcli con del \$con
+  fi
+done
+# add gateway interface connection.
+gwdev=\`nmcli dev | grep ethernet | egrep -v 'unmanaged' | head -n 1 | awk '{print \$1}'\`
+if [ "\$gwdev" != "" ]; then
+  nmcli c add type eth ifname \$gwdev con-name \$gwdev
+fi
+sed -i "/^#BENTO-BEGIN/,/^#BENTO-END/d" /etc/rc.d/rc.local
+chmod -x /etc/rc.d/rc.local
+#BENTO-END
+_EOF_
+  chmod +x /etc/rc.d/rc.local
+fi
 
 rm -f VBoxGuestAdditions_*.iso VBoxGuestAdditions_*.iso.?;
