@@ -1,7 +1,7 @@
 #!/bin/sh -eux
 
 # should output one of 'redhat' 'centos' 'oraclelinux'
-distro="`rpm -qf --queryformat '%{NAME}' /etc/redhat-release | cut -f 1 -d '-'`"
+distro="`rpm -qf --queryformat '%{NAME}' /etc/redhat-release | cut -f 1 -d '-'`" 
 
 # Remove development and kernel source packages
 yum -y remove gcc cpp kernel-devel kernel-headers perl;
