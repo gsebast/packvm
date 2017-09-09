@@ -12,7 +12,7 @@
     "headless": "true",
     "metadata": "floppy/dummy_metadata.json",
 
-    "mirror": "http://mirrors.kernel.org/centos",
+    "mirror": "http://mirror2.hs-esslingen.de/centos",
     "mirror_directory": "7.3.1611/isos/x86_64",
 
     "iso_name": "CentOS-7-x86_64-DVD-1611.iso",
