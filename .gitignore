@@ -1,4 +1,5 @@
-runpacker.*
-docker_image.json
-
-/packer_*/**/*
+.bundle/
+iso
+*.box
+packer_cache
+/builds/
