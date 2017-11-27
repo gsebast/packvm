@@ -1,29 +1,30 @@
 {
   "variables": {
-    "name": "centos-7.3",
-    "box_basename": "centos-7.3",
-    "template": "centos-7.3-x86_64",
+    "name": "centos-7.4",
+    "box_basename": "centos-7.4",
+    "template": "centos-7.4-x86_64",
 
     "build_timestamp": "{{isotime \"20060102150405\"}}",
     "git_revision": "__unknown_git_revision__",
-    "version": "2.1.TIMESTAMP",
+    "version": "TIMESTAMP",
 
-    "ks_path": "centos-7.3/ks.cfg",
+    "ks_path": "7/ks.cfg",
     "headless": "true",
-    "metadata": "floppy/dummy_metadata.json",
 
     "mirror": "http://mirror2.hs-esslingen.de/centos",
-    "mirror_directory": "7.3.1611/isos/x86_64",
+    "mirror_directory": "7.4.1708/isos/x86_64",
 
-    "iso_name": "CentOS-7-x86_64-DVD-1611.iso",
-    "iso_checksum": "c455ee948e872ad2194bdddd39045b83634e8613249182b88f549bb2319d97eb",
+    "iso_name": "CentOS-7-x86_64-DVD-1708.iso",
+    "iso_checksum": "ec7500d4b006702af6af023b1f8f1b890b6c7ee54400bb98cef968b883cd6546",
     "iso_checksum_type": "sha256",
 
     "http_root_context": "http",
     "http_pMin": "9001",
     "http_pMax": "9009",
 
-    "hdd_size": "16384",
+    "cpus": "1",
+    "disk_size": "20480",
+    "memory": "512",
 
     "username": "vagrant",
     "password": "vagrant",
@@ -50,7 +51,7 @@
       "virtualbox_version_file": ".vbox_version",
       "output_directory": "./{{user `box_basename`}}_{{user `vbox_provider`}}",
       "headless": "{{user `headless`}}",
-      "disk_size": "{{user `hdd_size`}}",
+      "disk_size": "{{user `disk_size`}}",
       "hard_drive_interface": "sata",
 
       "http_directory" : "{{user `http_root_context`}}",
@@ -67,25 +68,19 @@
           "modifyvm",
           "{{.Name}}",
           "--cpus",
-          "2"
+          "{{ user `cpus` }}"
         ],
         [
           "modifyvm",
           "{{.Name}}",
           "--memory",
-          "512"
-        ],
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--vram",
-          "32"
+          "{{ user `memory` }}"
         ]
       ],
 
       "boot_wait": "10s",
       "boot_command": [
-        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{user `ks_path`}}<enter><wait>"
+        "<up><wait><tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{user `ks_path`}}<enter><wait>"
       ],
 
       "shutdown_command": "echo 'vagrant' | sudo -S /sbin/halt -h -p"
@@ -102,13 +97,17 @@
       ],
       "type": "shell",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E sh -eux '{{.Path}}'",
+      "expect_disconnect": true,
       "scripts": [
-        "scripts/common/sshd.sh",
-        "scripts/centos/networking.sh",
-        "scripts/common/vagrant.sh",
-        "scripts/common/virtualbox.sh",
-        "scripts/centos/cleanup.sh",
-        "scripts/common/minimize.sh"
+        "scripts/update.sh",
+        "../_common/sshd.sh",
+        "scripts/networking.sh",
+        "../_common/vagrant.sh",
+        "../_common/virtualbox.sh",
+        "../_common/vmware.sh",
+        "../_common/parallels.sh",
+        "scripts/cleanup.sh",
+        "../_common/minimize.sh"
       ]
     }
   ],
@@ -117,8 +116,7 @@
     {
       "type": "vagrant",
       "only": ["virtualbox"],
-      "compression_level": "9",
-      "output": "./packer_builds/{{.Provider}}/{{user `box_basename`}}/{{user `template`}}.box"
+      "output": "../builds/{{.Provider}}/{{user `box_basename`}}/{{user `template`}}.box"
     }
   ]
 }

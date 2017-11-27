@@ -6,11 +6,10 @@
 
     "build_timestamp": "{{isotime \"20060102150405\"}}",
     "git_revision": "__unknown_git_revision__",
-    "version": "2.1.TIMESTAMP",
+    "version": "TIMESTAMP",
 
-    "preseed_path": "ubuntu-16.04/preseed.cfg",
-    "headless": "true",
-    "metadata": "floppy/dummy_metadata.json",
+    "preseed_path": "preseed.cfg",
+    "headless": "false",
 
     "mirror": "http://de.releases.ubuntu.com",
     "mirror_directory": "16.04.3",
@@ -23,7 +22,9 @@
     "http_pMin": "9001",
     "http_pMax": "9009",
 
-    "hdd_size": "16384",
+    "cpus": "2",
+    "disk_size": "20480",
+    "memory": "1024",
 
     "username": "vagrant",
     "password": "vagrant",
@@ -50,7 +51,7 @@
       "virtualbox_version_file": ".vbox_version",
       "output_directory": "./{{user `box_basename`}}_{{user `vbox_provider`}}",
       "headless": "{{user `headless`}}",
-      "disk_size": "{{user `hdd_size`}}",
+      "disk_size": "{{user `disk_size`}}",
       "hard_drive_interface": "sata",
 
       "http_directory" : "{{user `http_root_context`}}",
@@ -66,20 +67,14 @@
         [
           "modifyvm",
           "{{.Name}}",
-          "--cpus",
-          "2"
-        ],
-        [
-          "modifyvm",
-          "{{.Name}}",
           "--memory",
-          "512"
+          "{{ user `memory` }}"
         ],
         [
           "modifyvm",
           "{{.Name}}",
-          "--vram",
-          "32"
+          "--cpus",
+          "{{ user `cpus` }}"
         ]
       ],
 
@@ -94,14 +89,14 @@
         " console-setup/ask_detect=false<wait>",
         " console-setup/layoutcode=us<wait>",
         " console-setup/modelcode=pc105<wait>",
-        " debconf/frontend=interactive<wait>",
-        " debian-installer=en_US<wait>",
+        " debconf/frontend=noninteractive<wait>",
+        " debian-installer=en_US.UTF-8<wait>",
         " fb=false<wait>",
         " initrd=/install/initrd.gz<wait>",
         " kbd-chooser/method=us<wait>",
         " keyboard-configuration/layout=USA<wait>",
         " keyboard-configuration/variant=USA<wait>",
-        " locale=en_US<wait>",
+        " locale=en_US.UTF-8<wait>",
         " netcfg/get_domain=vm<wait>",
         " netcfg/get_hostname=vagrant<wait>",
         " grub-installer/bootdev=/dev/sda<wait>",
@@ -124,16 +119,20 @@
         "no_proxy={{user `no_proxy`}}"
       ],
       "type": "shell",
-      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E sh -eux '{{.Path}}'",
+      "expect_disconnect": true,
       "scripts": [
-        "scripts/ubuntu/update.sh",
-        "scripts/common/sshd.sh",
-        "scripts/ubuntu/networking.sh",
-        "scripts/ubuntu/sudoers.sh",
-        "scripts/ubuntu/vagrant.sh",
-        "scripts/common/virtualbox.sh",
-        "scripts/ubuntu/cleanup.sh",
-        "scripts/common/minimize.sh"
+        "scripts/update.sh",
+        "../_common/sshd.sh",
+        "scripts/networking.sh",
+        "scripts/sudoers.sh",
+        "scripts/vagrant.sh",
+        "../_common/virtualbox.sh",
+        "scripts/vmware.sh",
+        "../_common/parallels.sh",
+        "scripts/hyperv.sh",
+        "scripts/cleanup.sh",
+        "../_common/minimize.sh"
       ]
     }
   ],
@@ -142,8 +141,7 @@
     {
       "type": "vagrant",
       "only": ["virtualbox"],
-      "compression_level": "9",
-      "output": "./packer_builds/{{.Provider}}/{{user `box_basename`}}/{{user `template`}}.box"
+      "output": "../builds/{{.Provider}}/{{user `box_basename`}}/{{user `template`}}.box"
     }
   ]
 }
