@@ -1,14 +1,8 @@
-packvm
-======
+# packvm
 
-The project is based on the great chef/bento project.
+The project is based on the great chef/bento project. In comparison to Chef's Bento project this project is reduced in scope and adapted to personal preferences.
 
-I use it to build base box images for Vagrant for current OS versions of CentOS and Ubuntu.
-
-
-Basic Usage
------------
-
+## Basic Usage
 ##### Validating a box build definition
 ```
    $ packer validate <box_name>.json
