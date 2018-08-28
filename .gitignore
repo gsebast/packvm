@@ -1,5 +1,7 @@
 .bundle/
-iso
+_pre-install/
+
+*.7z
 *.box
-packer_cache
-/builds/
+*.iso
+*.zip

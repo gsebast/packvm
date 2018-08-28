@@ -1,8 +1,11 @@
 {
+  "_comment": "Validation Command:  `packer validate centos.json`",
+  "_comment": "Build Command:       `packer build centos.json`",
+
   "variables": {
     "name": "centos-7.4",
-    "box_basename": "centos-7.4",
-    "template": "centos-7.4-x86_64",
+    "box_basename": "centos-7.5",
+    "template": "centos-7.5-x86_64_srv",
 
     "build_timestamp": "{{isotime \"20060102150405\"}}",
     "git_revision": "__unknown_git_revision__",
@@ -12,28 +15,30 @@
     "headless": "true",
 
     "mirror": "http://mirror2.hs-esslingen.de/centos",
-    "mirror_directory": "7.4.1708/isos/x86_64",
+    "mirror_directory": "7.5.1804/isos/x86_64",
 
-    "iso_name": "CentOS-7-x86_64-DVD-1708.iso",
-    "iso_checksum": "ec7500d4b006702af6af023b1f8f1b890b6c7ee54400bb98cef968b883cd6546",
+    "iso_name": "CentOS-7-x86_64-DVD-1804.iso",
+    "iso_checksum": "506e4e06abf778c3435b4e5745df13e79ebfc86565d7ea1e128067ef6b5a6345",
     "iso_checksum_type": "sha256",
 
-    "http_root_context": "http",
+    "http_root_context": "../_shared/http",
     "http_pMin": "9001",
     "http_pMax": "9009",
 
     "cpus": "1",
-    "disk_size": "20480",
-    "memory": "512",
+    "memory": "1024",
+    "disk_size": "65536",
 
     "username": "vagrant",
     "password": "vagrant",
 
     "vbox_provider": "virtualbox",
 
-    "http_proxy": "",
-    "https_proxy": "",
-    "no_proxy": ""
+    "ftp_proxy": "{{env `ftp_proxy`}}",
+    "http_proxy": "{{env `http_proxy`}}",
+    "https_proxy": "{{env `https_proxy`}}",
+    "rsync_proxy": "{{env `rsync_proxy`}}",
+    "no_proxy": "{{env `no_proxy`}}"
   },
 
   "builders": [
@@ -83,7 +88,7 @@
         "<up><wait><tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{user `ks_path`}}<enter><wait>"
       ],
 
-      "shutdown_command": "echo 'vagrant' | sudo -S /sbin/halt -h -p"
+      "shutdown_command": "echo '{{user `password`}}' | sudo -S /sbin/halt -h -p"
     }
   ],
 
@@ -91,23 +96,25 @@
     {
       "environment_vars": [
         "HOME_DIR=/home/vagrant",
+        "ftp_proxy={{user `ftp_proxy`}}",
         "http_proxy={{user `http_proxy`}}",
         "https_proxy={{user `https_proxy`}}",
+        "rsync_proxy={{user `rsync_proxy`}}",
         "no_proxy={{user `no_proxy`}}"
       ],
       "type": "shell",
-      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E sh -eux '{{.Path}}'",
+      "execute_command": "echo '{{user `password`}}' | {{.Vars}} sudo -S -E sh -eux '{{.Path}}'",
       "expect_disconnect": true,
       "scripts": [
         "scripts/update.sh",
-        "../_common/sshd.sh",
+        "../../_common/sshd.sh",
         "scripts/networking.sh",
-        "../_common/vagrant.sh",
-        "../_common/virtualbox.sh",
-        "../_common/vmware.sh",
-        "../_common/parallels.sh",
+        "../../_common/vagrant.sh",
+        "../../_common/virtualbox.sh",
+        "../../_common/vmware.sh",
+        "../../_common/parallels.sh",
         "scripts/cleanup.sh",
-        "../_common/minimize.sh"
+        "../../_common/minimize.sh"
       ]
     }
   ],
@@ -116,7 +123,8 @@
     {
       "type": "vagrant",
       "only": ["virtualbox"],
-      "output": "../builds/{{.Provider}}/{{user `box_basename`}}/{{user `template`}}.box"
+      "output": "../_artifacts/{{.Provider}}/{{user `box_basename`}}/{{user `template`}}.box",
+      "keep_input_artifact": false
     }
   ]
 }

@@ -1,0 +1,31 @@
+{
+  "_comment": "Validation Command:  `packer validate -var-file=ubuntu-14.04-amd64_desk.json ubuntu.json`",
+  "_comment": "Build Command:       `packer build -var-file=ubuntu-14.04-amd64_desk.json ubuntu.json`",
+
+  "name": "ubuntu-14.04.5",
+  "box_basename": "ubuntu-14.04",
+  "template": "ubuntu-14.04-amd64_desk",
+
+  "boot_command_prefix": "<enter><wait><f6><esc><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+
+  "mirror": "http://de.releases.ubuntu.com",
+  "mirror_directory": "14.04.5",
+
+  "iso_name": "ubuntu-14.04.5-server-amd64.iso",
+  "iso_checksum": "dde07d37647a1d2d9247e33f14e91acb10445a97578384896b4e1d985f754cc1",
+
+  "cpus": "1",
+  "memory": "1024",
+  "disk_size": "65536",
+
+  "ftp_proxy": "",
+  "http_proxy": "",
+  "https_proxy": "",
+  "rsync_proxy": "",
+  "no_proxy": "",
+
+  "desktop": "true",
+  "update": "true",
+  "install_vagrant_key": "true",
+  "cleanup_pause": ""
+}
