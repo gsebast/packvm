@@ -47,12 +47,7 @@
     "http_proxy": "{{env `http_proxy`}}",
     "https_proxy": "{{env `https_proxy`}}",
     "rsync_proxy": "{{env `rsync_proxy`}}",
-    "no_proxy": "{{env `no_proxy`}}",
-
-    "desktop": "true",
-    "update": "true",
-    "install_vagrant_key": "true",
-    "cleanup_pause": ""
+    "no_proxy": "{{env `no_proxy`}}"
   },
 
   "builders": [
@@ -126,17 +121,17 @@
         "<enter><wait>"
       ],
 
-      "shutdown_command": "echo '{{user `username`}}' | sudo -S shutdown -P now"
+      "shutdown_command": "echo {{user `username`}} | sudo -S shutdown -P now"
     },
     {
       "type": "virtualbox-ovf",
-      "name": "vb_plain_{{user `image_id`}}",
+      "name": "vb_custom-{{user `image_id`}}",
 
-      "output_directory": "./{{user `template`}}_{{user `image_id`}}_{{user `vbox_provider`}}",
+      "output_directory": "./{{user `template`}}_custom-{{user `image_id`}}_{{user `vbox_provider`}}",
 
-      "source_path": "../_artifacts/virtualbox/{{user `box_basename`}}/ovf/{{user `ovf_source_file`}}",
+      "source_path": "../_artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/ovf/{{user `ovf_source_file`}}",
 
-      "vm_name": "{{user `template`}}_{{user `image_id`}}",
+      "vm_name": "{{user `template`}}_custom-{{user `image_id`}}",
 
       "headless": "{{user `headless`}}",
 
@@ -145,7 +140,7 @@
       "ssh_port": 22,
       "ssh_wait_timeout": "3600s",
 
-      "shutdown_command": "echo '{{user `username`}}' | sudo -S shutdown -P now"
+      "shutdown_command": "echo {{user `username`}} | sudo -S shutdown -P now"
     }
   ],
 
@@ -169,7 +164,7 @@
         "rsync_proxy={{user `rsync_proxy`}}",
         "no_proxy={{user `no_proxy`}}"
       ],
-      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash -ux '{{.Path}}'",
+      "execute_command": "echo {{user `username`}} | {{.Vars}} sudo -E -S bash -ux '{{.Path}}'",
       "expect_disconnect": true,
       "scripts": [
         "scripts/update.sh",
@@ -186,7 +181,7 @@
     {
       "type": "shell",
       "only": ["vb_plain"],
-      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash -ux '{{.Path}}'",
+      "execute_command": "echo {{user `username`}} | {{.Vars}} sudo -E -S bash -ux '{{.Path}}'",
       "inline": ["mv /tmp/input_source.sh /sbin/input_source.sh && chmod 755 /sbin/input_source.sh"]
     },
     {
@@ -198,14 +193,8 @@
     {
       "type": "shell",
       "only": ["vb_plain"],
-      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash -ux '{{.Path}}'",
+      "execute_command": "echo {{user `username`}} | {{.Vars}} sudo -E -S bash -ux '{{.Path}}'",
       "inline": ["mv /tmp/input_source.desktop /etc/xdg/autostart/input_source.desktop"]
-    },
-    {
-      "type": "file",
-      "only": ["vb_plain_{{user `image_id`}}"],
-      "source": "scripts/custom/input_source.desktop",
-      "destination": "/etc/xdg/autostart/input_source.desktop"
     },
     {
       "type": "shell",
@@ -226,7 +215,7 @@
         "rsync_proxy={{user `rsync_proxy`}}",
         "no_proxy={{user `no_proxy`}}"
       ],
-      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash -ux '{{.Path}}'",
+      "execute_command": "echo {{user `username`}} | {{.Vars}} sudo -E -S bash -ux '{{.Path}}'",
       "expect_disconnect": true,
       "scripts": [
         "scripts/vagrant.sh",
@@ -235,34 +224,33 @@
         "scripts/virtualbox.sh",
         "scripts/parallels.sh",
         "scripts/motd.sh",
-        "scripts/cleanup.sh",
-        "scripts/minimize.sh"
+        "scripts/minimize.sh",
+        "scripts/cleanup.sh"
       ]
     },
     {
       "type": "shell",
-      "only": ["vb_plain_{{user `image_id`}}"],
+      "only": ["vb_custom-{{user `image_id`}}"],
       "environment_vars": [
         "HOME_DIR=/home/vagrant"
       ],
-      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash -ux '{{.Path}}'",
+      "execute_command": "echo {{user `username`}} | {{.Vars}} sudo -E -S bash -ux '{{.Path}}'",
       "expect_disconnect": true,
-      "scripts": "{{user `scripts`}}",
-      "inline": ["echo ===> Dummy Script"]
+      "scripts": "{{user `scripts`}}"
     }
   ],
 
   "post-processors": [
     {
       "type": "vagrant",
-      "except": ["vb_plain_{{user `image_id`}}"],
+      "except": ["vb_custom-{{user `image_id`}}"],
       "output": "../_artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/{{user `template`}}_{{user `image_id`}}.box",
       "keep_input_artifact": false
     },
     {
       "type": "vagrant",
-      "only": ["vb_plain_{{user `image_id`}}"],
-      "output": "../_artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/{{user `template`}}_{{user `image_id`}}.box",
+      "only": ["vb_custom-{{user `image_id`}}"],
+      "output": "../_artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/{{user `template`}}_custom-{{user `image_id`}}.box",
       "keep_input_artifact": false
     },
     {

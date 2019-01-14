@@ -121,17 +121,17 @@
         "<enter><wait>"
       ],
 
-      "shutdown_command": "echo '{{user `username`}}' | sudo -S shutdown -P now"
+      "shutdown_command": "echo {{user `username`}} | sudo -S shutdown -P now"
     },
     {
       "type": "virtualbox-ovf",
-      "name": "vb_plain_{{user `image_id`}}",
+      "name": "vb_custom-{{user `image_id`}}",
 
-      "output_directory": "./{{user `template`}}_{{user `image_id`}}_{{user `vbox_provider`}}",
+      "output_directory": "./{{user `template`}}_custom-{{user `image_id`}}_{{user `vbox_provider`}}",
 
-      "source_path": "../_artifacts/virtualbox/{{user `box_basename`}}/ovf/{{user `ovf_source_file`}}",
+      "source_path": "../_artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/ovf/{{user `ovf_source_file`}}",
 
-      "vm_name": "{{user `template`}}_{{user `image_id`}}",
+      "vm_name": "{{user `template`}}_custom-{{user `image_id`}}",
 
       "headless": "{{user `headless`}}",
 
@@ -140,7 +140,7 @@
       "ssh_port": 22,
       "ssh_wait_timeout": "3600s",
 
-      "shutdown_command": "echo '{{user `username`}}' | sudo -S shutdown -P now"
+      "shutdown_command": "echo {{user `username`}} | sudo -S shutdown -P now"
     }
   ],
 
@@ -151,7 +151,7 @@
       "environment_vars": [
         "HOME_DIR=/home/vagrant"
       ],
-      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S sh -eux '{{.Path}}'",
+      "execute_command": "echo {{user `username`}} | {{.Vars}} sudo -E -S sh -eux '{{.Path}}'",
       "expect_disconnect": true,
       "scripts": [
         "scripts/update.sh",
@@ -169,28 +169,27 @@
     },
     {
       "type": "shell",
-      "only": ["vb_plain_{{user `image_id`}}"],
+      "only": ["vb_custom-{{user `image_id`}}"],
       "environment_vars": [
         "HOME_DIR=/home/vagrant"
       ],
-      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S sh -eux '{{.Path}}'",
+      "execute_command": "echo {{user `username`}} | {{.Vars}} sudo -E -S sh -eux '{{.Path}}'",
       "expect_disconnect": true,
-      "scripts": "{{user `scripts`}}",
-      "inline": ["echo ===> Dummy Script"]
+      "scripts": "{{user `scripts`}}"
     }
   ],
 
   "post-processors": [
     {
       "type": "vagrant",
-      "except": ["vb_plain_{{user `image_id`}}"],
+      "except": ["vb_custom-{{user `image_id`}}"],
       "output": "../_artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/{{user `template`}}_{{user `image_id`}}.box",
       "keep_input_artifact": false
     },
     {
       "type": "vagrant",
-      "only": ["vb_plain_{{user `image_id`}}"],
-      "output": "../_artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/{{user `template`}}_{{user `image_id`}}.box",
+      "only": ["vb_custom-{{user `image_id`}}"],
+      "output": "../_artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/{{user `template`}}_custom-{{user `image_id`}}.box",
       "keep_input_artifact": false
     },
     {

@@ -2,34 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="96222ab8-932d-4c2b-9857-0bb3e5460188" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/_common/scripts/ps/cleanup_input_artifact.ps1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/_common/scripts/ps/copy_ovf.ps1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_common/metadata.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_common/minimize.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_common/parallels.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_common/sshd.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_common/vagrant.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_common/virtualbox.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_common/vmware.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/centos/_cache/.gitkeep" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/centos/_shared/http/7/ks.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/centos/_shared/http/7/ks.cfg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/centos/server/centos-7.5-x86_64_srv.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/centos/server/centos.json" beforeDir="false" afterPath="$PROJECT_DIR$/centos/server/centos.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ubuntu/_cache/.gitkeep" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ubuntu/_shared/var/ubuntu-16.04-amd64_srv.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ubuntu/_shared/var/ubuntu-18.04-amd64_srv.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ubuntu/desktop/DEPRECATED_ubuntu-14.04-amd64_desk.json.BAK" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ubuntu/desktop/DEPRECATED_ubuntu-17.10-amd64_desk.json.BAK" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ubuntu/desktop/scripts/cleanup.sh" beforeDir="false" afterPath="$PROJECT_DIR$/ubuntu/desktop/scripts/cleanup.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ubuntu/desktop/scripts/desktop.sh" beforeDir="false" afterPath="$PROJECT_DIR$/ubuntu/desktop/scripts/desktop.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ubuntu/desktop/scripts/input_source.desktop" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ubuntu/desktop/scripts/input_source.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ubuntu/desktop/scripts/timezone.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ubuntu/desktop/scripts/update.sh" beforeDir="false" afterPath="$PROJECT_DIR$/ubuntu/desktop/scripts/update.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ubuntu/desktop/ubuntu-16.04-amd64_desk.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ubuntu/desktop/ubuntu-18.04-amd64_desk.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_common/scripts/sh/shared/metadata.sh" beforeDir="false" afterPath="$PROJECT_DIR$/_common/scripts/sh/shared/metadata.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_common/scripts/sh/shared/minimize.sh" beforeDir="false" afterPath="$PROJECT_DIR$/_common/scripts/sh/shared/minimize.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_common/scripts/sh/shared/parallels.sh" beforeDir="false" afterPath="$PROJECT_DIR$/_common/scripts/sh/shared/parallels.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_common/scripts/sh/shared/sshd.sh" beforeDir="false" afterPath="$PROJECT_DIR$/_common/scripts/sh/shared/sshd.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_common/scripts/sh/shared/vagrant.sh" beforeDir="false" afterPath="$PROJECT_DIR$/_common/scripts/sh/shared/vagrant.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_common/scripts/sh/shared/virtualbox.sh" beforeDir="false" afterPath="$PROJECT_DIR$/_common/scripts/sh/shared/virtualbox.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_common/scripts/sh/shared/vmware.sh" beforeDir="false" afterPath="$PROJECT_DIR$/_common/scripts/sh/shared/vmware.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-16.04-amd64.json" beforeDir="false" afterPath="$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-16.04-amd64.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-16.04-amd64_extendible.json" beforeDir="false" afterPath="$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-16.04-amd64_extendible.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-18.04-amd64.json" beforeDir="false" afterPath="$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-18.04-amd64.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-18.04-amd64_extendible.json" beforeDir="false" afterPath="$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-18.04-amd64_extendible.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ubuntu/desktop/ubuntu.json" beforeDir="false" afterPath="$PROJECT_DIR$/ubuntu/desktop/ubuntu.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ubuntu/server/DEPRECATED_ubuntu-14.04-amd64_srv.json.BAK" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ubuntu/server/DEPRECATED_ubuntu-17.10-amd64_srv.json.BAK" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ubuntu/server/ubuntu.json" beforeDir="false" afterPath="$PROJECT_DIR$/ubuntu/server/ubuntu.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,46 +27,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ubuntu/server/ubuntu.json">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ubuntu/desktop/ubuntu.json">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-16.04-amd64.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="3" column="133" selection-start-line="3" selection-start-column="37" selection-end-line="3" selection-end-column="133" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/centos/server/centos.json">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/centos/desktop/centos.json">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/centos/_shared/vars/centos-7.6-x86_64.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="3" column="132" selection-start-line="3" selection-start-column="37" selection-end-line="3" selection-end-column="132" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -116,16 +65,17 @@
         <option value="$PROJECT_DIR$/_common/scripts/sh/helpers/cleanup_input_artifact.sh" />
         <option value="$PROJECT_DIR$/ubuntu/server/ubuntu_with_powershell.json" />
         <option value="$PROJECT_DIR$/_common/scripts/sh/helpers/copy_ovf.sh" />
-        <option value="$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-18.04-amd64_extendible.json" />
-        <option value="$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-16.04-amd64_extendible.json" />
         <option value="$PROJECT_DIR$/centos/_shared/vars/centos-7.6-x86_64_extendible.json" />
         <option value="$PROJECT_DIR$/centos/_shared/vars/centos-7.6-x86_64.json" />
         <option value="$PROJECT_DIR$/centos/server/scripts/networking.sh" />
-        <option value="$PROJECT_DIR$/ubuntu/server/ubuntu.json" />
-        <option value="$PROJECT_DIR$/ubuntu/desktop/ubuntu.json" />
         <option value="$PROJECT_DIR$/centos/server/centos.json" />
         <option value="$PROJECT_DIR$/centos/desktop/centos.json" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-16.04-amd64.json" />
+        <option value="$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-16.04-amd64_extendible.json" />
+        <option value="$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-18.04-amd64_extendible.json" />
+        <option value="$PROJECT_DIR$/ubuntu/desktop/ubuntu.json" />
+        <option value="$PROJECT_DIR$/ubuntu/server/ubuntu.json" />
       </list>
     </option>
   </component>
@@ -140,13 +90,39 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="packvm" type="b2602c69:ProjectViewProjectNode" />
               <item name="packvm" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="packvm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="packvm" type="462c0819:PsiDirectoryNode" />
+              <item name="_common" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="packvm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="packvm" type="462c0819:PsiDirectoryNode" />
+              <item name="_common" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="packvm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="packvm" type="462c0819:PsiDirectoryNode" />
+              <item name="_common" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="sh" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="packvm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="packvm" type="462c0819:PsiDirectoryNode" />
+              <item name="_common" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="sh" type="462c0819:PsiDirectoryNode" />
+              <item name="shared" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="packvm" type="b2602c69:ProjectViewProjectNode" />
@@ -233,7 +209,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -294,11 +270,12 @@
       <workItem from="1547408757278" duration="34000" />
       <workItem from="1547408903442" duration="3238000" />
       <workItem from="1547483745476" duration="2363000" />
+      <workItem from="1547493715850" duration="2070000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52160000" />
+    <option name="totallyTimeSpent" value="54230000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -312,7 +289,7 @@
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4989796" visible="true" weight="0.2899878" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4989796" visible="true" weight="0.2936508" />
       <window_info id="Structure" order="1" sideWeight="0.50102043" side_tool="true" weight="0.26495728" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -330,7 +307,7 @@
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.96938777" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="11" weight="0.32959184" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="11" visible="true" weight="0.32959184" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -391,23 +368,6 @@
     <entry file="file://$PROJECT_DIR$/_common/scripts/sh/helpers/copy_ovf.sh">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-16.04-amd64_extendible.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-18.04-amd64.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="133" selection-start-line="3" selection-start-column="37" selection-end-line="3" selection-end-column="133" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-18.04-amd64_extendible.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="5" column="242" selection-start-line="5" selection-start-column="37" selection-end-line="5" selection-end-column="242" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/centos/_artifacts/virtualbox/centos-7.6/ovf/centos-7.6-x86_64_dsk.ovf">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -442,31 +402,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ubuntu/desktop/ubuntu.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/centos/server/centos.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ubuntu/server/ubuntu.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/centos/desktop/centos.json">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-16.04-amd64.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="133" selection-start-line="3" selection-start-column="37" selection-end-line="3" selection-end-column="133" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="9" lean-forward="true" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/centos/_shared/vars/centos-7.6-x86_64.json">
       <provider selected="true" editor-type-id="text-editor">
@@ -474,6 +414,63 @@
           <caret line="3" column="132" selection-start-line="3" selection-start-column="37" selection-end-line="3" selection-end-column="132" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_common/scripts/sh/metadata.sh">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_common/scripts/sh/shared/metadata.sh">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_common/scripts/sh/shared/minimize.sh">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_common/scripts/sh/shared/parallels.sh">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_common/scripts/sh/shared/sshd.sh">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-16.04-amd64.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-16.04-amd64_extendible.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-18.04-amd64.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-18.04-amd64_extendible.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ubuntu/desktop/ubuntu.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ubuntu/server/ubuntu.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_common/scripts/sh/shared/vagrant.sh">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_common/scripts/sh/shared/virtualbox.sh">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_common/scripts/sh/shared/vmware.sh">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
   <component name="masterDetails">
