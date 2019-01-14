@@ -21,7 +21,7 @@
 
     "locale": "en_US.UTF-8",
 
-    "mirror": "http://de.releases.ubuntu.com",
+    "mirror": "http://releases.ubuntu.com",
     "mirror_directory": "16.04.5",
 
     "iso_name": "ubuntu-16.04.5-server-amd64.iso",
