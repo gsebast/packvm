@@ -1,11 +1,14 @@
 {
-  "_comment": "Validation Command:  `packer validate ubuntu.json`",
-  "_comment": "Build Command:       `packer build ubuntu.json`",
+  "_comment": "Default build definition shared by all Ubuntu Desktop builds.",
+
+  "_comment": "Validation Command:  `packer validate -only='vb_plain' ubuntu.json`",
+
+  "_comment": "Build Command:       `packer build -only='vb_plain' ubuntu.json`",
 
   "variables": {
-    "name": "ubuntu-16.04",
     "box_basename": "ubuntu-16.04",
-    "template": "ubuntu-16.04-amd64_srv",
+    "template": "ubuntu-16.04-amd64",
+    "image_id": "dsk",
 
     "build_timestamp": "{{isotime \"20060102150405\"}}",
     "git_revision": "__unknown_git_revision__",
@@ -13,16 +16,19 @@
 
     "preseed_path": "preseed.cfg",
     "headless": "true",
+
     "boot_command_prefix": "<enter><wait><f6><esc><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
 
     "locale": "en_US.UTF-8",
 
     "mirror": "http://de.releases.ubuntu.com",
-    "mirror_directory": "16.04.4",
+    "mirror_directory": "16.04.5",
 
-    "iso_name": "ubuntu-16.04.4-server-amd64.iso",
-    "iso_checksum": "0a03608988cfd2e50567990dc8be96fb3c501e198e2e6efcb846d89efc7b89f2",
+    "iso_name": "ubuntu-16.04.5-server-amd64.iso",
+    "iso_checksum": "c94de1cc2e10160f325eb54638a5b5aa38f181d60ee33dae9578d96d932ee5f8",
     "iso_checksum_type": "sha256",
+
+    "ovf_source_file": "some_valid_ovf_file.ovf",
 
     "http_root_context": "../_shared/http",
     "http_pMin": "9001",
@@ -30,7 +36,7 @@
 
     "cpus": "1",
     "memory": "1024",
-    "disk_size": "65536",
+    "disk_size": "16384",
 
     "username": "vagrant",
     "password": "vagrant",
@@ -52,7 +58,10 @@
   "builders": [
     {
       "type": "virtualbox-iso",
-      "name": "virtualbox",
+      "name": "vb_plain",
+
+      "output_directory": "./{{user `template`}}_{{user `image_id`}}_{{user `vbox_provider`}}",
+
       "guest_os_type": "Ubuntu_64",
       "guest_additions_path": "VBoxGuestAdditions_{{ .Version }}.iso",
 
@@ -60,10 +69,9 @@
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
 
-      "vm_name": "{{user `template`}}",
+      "vm_name": "{{user `template`}}_{{user `image_id`}}",
       "virtualbox_version_file": ".vbox_version",
 
-      "output_directory": "./{{user `box_basename`}}_{{user `vbox_provider`}}",
       "headless": "{{user `headless`}}",
 
       "disk_size": "{{user `disk_size`}}",
@@ -118,49 +126,109 @@
         "<enter><wait>"
       ],
 
-      "shutdown_command": "echo '{{user `password`}}' | sudo -S shutdown -P now"
+      "shutdown_command": "echo '{{user `username`}}' | sudo -S shutdown -P now"
+    },
+    {
+      "type": "virtualbox-ovf",
+      "name": "vb_plain_{{user `image_id`}}",
+
+      "output_directory": "./{{user `template`}}_{{user `image_id`}}_{{user `vbox_provider`}}",
+
+      "source_path": "../_artifacts/virtualbox/{{user `box_basename`}}/ovf/{{user `ovf_source_file`}}",
+
+      "vm_name": "{{user `template`}}_{{user `image_id`}}",
+
+      "headless": "{{user `headless`}}",
+
+      "ssh_username": "{{user `username`}}",
+      "ssh_password": "{{user `password`}}",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "3600s",
+
+      "shutdown_command": "echo '{{user `username`}}' | sudo -S shutdown -P now"
     }
   ],
 
   "provisioners": [
     {
-      "type": "file",
-      "source": "scripts/input_source.sh",
-      "destination": "/sbin/input_source.sh"
-    },
-    {
       "type": "shell",
-      "execute_command": "echo '{{user `password`}}' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
-      "inline": ["chmod 755 /sbin/input_source.sh"]
-    },
-    {
-      "type": "file",
-      "source": "scripts/input_source.desktop",
-      "destination": "/etc/xdg/autostart/input_source.desktop"
-    },
-    {
-      "type": "shell",
+      "only": ["vb_plain"],
       "environment_vars": [
         "HOME_DIR=/home/vagrant",
+
         "CLEANUP_PAUSE={{user `cleanup_pause`}}",
         "DESKTOP={{user `desktop`}}",
         "UPDATE={{user `update`}}",
         "INSTALL_VAGRANT_KEY={{user `install_vagrant_key`}}",
         "SSH_USERNAME={{user `username`}}",
         "SSH_PASSWORD={{user `password`}}",
+
         "ftp_proxy={{user `ftp_proxy`}}",
         "http_proxy={{user `http_proxy`}}",
         "https_proxy={{user `https_proxy`}}",
         "rsync_proxy={{user `rsync_proxy`}}",
         "no_proxy={{user `no_proxy`}}"
       ],
-      "execute_command": "echo '{{user `password`}}' | {{.Vars}} sudo -S -E sh -eux '{{.Path}}'",
+      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash -ux '{{.Path}}'",
       "expect_disconnect": true,
       "scripts": [
         "scripts/update.sh",
         "scripts/desktop.sh",
-        "scripts/timezone.sh",
-        "scripts/input_source.sh",
+        "scripts/custom/timezone.sh"
+      ]
+    },
+    {
+      "type": "file",
+      "only": ["vb_plain"],
+      "source": "scripts/custom/input_source.sh",
+      "destination": "/tmp/input_source.sh"
+    },
+    {
+      "type": "shell",
+      "only": ["vb_plain"],
+      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash -ux '{{.Path}}'",
+      "inline": ["mv /tmp/input_source.sh /sbin/input_source.sh && chmod 755 /sbin/input_source.sh"]
+    },
+    {
+      "type": "file",
+      "only": ["vb_plain"],
+      "source": "scripts/custom/input_source.desktop",
+      "destination": "/tmp/input_source.desktop"
+    },
+    {
+      "type": "shell",
+      "only": ["vb_plain"],
+      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash -ux '{{.Path}}'",
+      "inline": ["mv /tmp/input_source.desktop /etc/xdg/autostart/input_source.desktop"]
+    },
+    {
+      "type": "file",
+      "only": ["vb_plain_{{user `image_id`}}"],
+      "source": "scripts/custom/input_source.desktop",
+      "destination": "/etc/xdg/autostart/input_source.desktop"
+    },
+    {
+      "type": "shell",
+      "only": ["vb_plain"],
+      "environment_vars": [
+        "HOME_DIR=/home/vagrant",
+
+        "CLEANUP_PAUSE={{user `cleanup_pause`}}",
+        "DESKTOP={{user `desktop`}}",
+        "UPDATE={{user `update`}}",
+        "INSTALL_VAGRANT_KEY={{user `install_vagrant_key`}}",
+        "SSH_USERNAME={{user `username`}}",
+        "SSH_PASSWORD={{user `password`}}",
+
+        "ftp_proxy={{user `ftp_proxy`}}",
+        "http_proxy={{user `http_proxy`}}",
+        "https_proxy={{user `https_proxy`}}",
+        "rsync_proxy={{user `rsync_proxy`}}",
+        "no_proxy={{user `no_proxy`}}"
+      ],
+      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash -ux '{{.Path}}'",
+      "expect_disconnect": true,
+      "scripts": [
         "scripts/vagrant.sh",
         "scripts/sshd.sh",
         "scripts/vmware.sh",
@@ -170,15 +238,46 @@
         "scripts/cleanup.sh",
         "scripts/minimize.sh"
       ]
+    },
+    {
+      "type": "shell",
+      "only": ["vb_plain_{{user `image_id`}}"],
+      "environment_vars": [
+        "HOME_DIR=/home/vagrant"
+      ],
+      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash -ux '{{.Path}}'",
+      "expect_disconnect": true,
+      "scripts": "{{user `scripts`}}",
+      "inline": ["echo ===> Dummy Script"]
     }
   ],
 
   "post-processors": [
     {
       "type": "vagrant",
-      "only": ["virtualbox"],
-      "output": "../_artifacts/{{.Provider}}/{{user `box_basename`}}/{{user `template`}}.box",
+      "except": ["vb_plain_{{user `image_id`}}"],
+      "output": "../_artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/{{user `template`}}_{{user `image_id`}}.box",
       "keep_input_artifact": false
+    },
+    {
+      "type": "vagrant",
+      "only": ["vb_plain_{{user `image_id`}}"],
+      "output": "../_artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/{{user `template`}}_{{user `image_id`}}.box",
+      "keep_input_artifact": false
+    },
+    {
+      "type": "shell-local",
+      "only": ["vb_plain"],
+      "environment_vars": [
+        "SOURCE_FOLDER=./{{user `template`}}_{{user `image_id`}}_{{user `vbox_provider`}}",
+        "FILE_PATTERN={{user `template`}}_{{user `image_id`}}*",
+        "TARGET_FOLDER=../_artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/ovf"
+      ],
+      "execute_command": ["bash", "-c", "{{.Vars}} {{.Script}}"],
+      "scripts": [
+        "../../_common/scripts/sh/helpers/copy_ovf.sh",
+        "../../_common/scripts/sh/helpers/cleanup_input_artifact.sh"
+      ]
     }
   ]
 }

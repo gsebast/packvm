@@ -4,4 +4,7 @@ _pre-install/
 *.7z
 *.box
 *.iso
+*.ovf
+*.vmdk
 *.zip
+*snippet*

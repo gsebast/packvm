@@ -1,0 +1,28 @@
+{
+  "_comment": "Variables for building plain Ubuntu Desktop or Server 18.04 LTS 64-bit images.",
+
+  "_comment": "Validation Command:  `packer validate -var-file='../_shared/vars/ubuntu-18.04-amd64.json' -only='vb_plain' ubuntu.json`",
+
+  "_comment": "Build Command:       `packer build -var-file='../_shared/vars/ubuntu-18.04-amd64.json' -only='vb_plain' ubuntu.json`",
+
+  "box_basename": "ubuntu-18.04",
+  "template": "ubuntu-18.04-amd64",
+
+  "boot_command_prefix": "<esc><esc><enter><wait>",
+
+  "mirror": "http://cdimage.ubuntu.com",
+  "mirror_directory": "ubuntu/releases/18.04.1/release",
+
+  "iso_name": "ubuntu-18.04.1-server-amd64.iso",
+  "iso_checksum": "a5b0ea5918f850124f3d72ef4b85bda82f0fcd02ec721be19c1a6952791c8ee8",
+
+  "cpus": "1",
+  "memory": "1024",
+  "disk_size": "16384",
+
+  "ftp_proxy": "",
+  "http_proxy": "",
+  "https_proxy": "",
+  "rsync_proxy": "",
+  "no_proxy": ""
+}
