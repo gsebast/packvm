@@ -121,7 +121,7 @@
         "<enter><wait>"
       ],
 
-      "shutdown_command": "echo {{user `username`}} | sudo -S shutdown -P now"
+      "shutdown_command": "echo '{{user `username`}}' | sudo -S shutdown -P now"
     },
     {
       "type": "virtualbox-ovf",
@@ -140,7 +140,7 @@
       "ssh_port": 22,
       "ssh_wait_timeout": "3600s",
 
-      "shutdown_command": "echo {{user `username`}} | sudo -S shutdown -P now"
+      "shutdown_command": "echo '{{user `username`}}' | sudo -S shutdown -P now"
     }
   ],
 
@@ -164,7 +164,7 @@
         "rsync_proxy={{user `rsync_proxy`}}",
         "no_proxy={{user `no_proxy`}}"
       ],
-      "execute_command": "echo {{user `username`}} | {{.Vars}} sudo -E -S bash -ux '{{.Path}}'",
+      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash -u '{{.Path}}'",
       "expect_disconnect": true,
       "scripts": [
         "scripts/update.sh",
@@ -181,7 +181,7 @@
     {
       "type": "shell",
       "only": ["vb_plain"],
-      "execute_command": "echo {{user `username`}} | {{.Vars}} sudo -E -S bash -ux '{{.Path}}'",
+      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash -u '{{.Path}}'",
       "inline": ["mv /tmp/input_source.sh /sbin/input_source.sh && chmod 755 /sbin/input_source.sh"]
     },
     {
@@ -193,7 +193,7 @@
     {
       "type": "shell",
       "only": ["vb_plain"],
-      "execute_command": "echo {{user `username`}} | {{.Vars}} sudo -E -S bash -ux '{{.Path}}'",
+      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash -u '{{.Path}}'",
       "inline": ["mv /tmp/input_source.desktop /etc/xdg/autostart/input_source.desktop"]
     },
     {
@@ -215,7 +215,7 @@
         "rsync_proxy={{user `rsync_proxy`}}",
         "no_proxy={{user `no_proxy`}}"
       ],
-      "execute_command": "echo {{user `username`}} | {{.Vars}} sudo -E -S bash -ux '{{.Path}}'",
+      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash -u '{{.Path}}'",
       "expect_disconnect": true,
       "scripts": [
         "scripts/vagrant.sh",
@@ -234,7 +234,7 @@
       "environment_vars": [
         "HOME_DIR=/home/vagrant"
       ],
-      "execute_command": "echo {{user `username`}} | {{.Vars}} sudo -E -S bash -ux '{{.Path}}'",
+      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash -u '{{.Path}}'",
       "expect_disconnect": true,
       "scripts": "{{user `scripts`}}"
     }
@@ -243,9 +243,9 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "except": ["vb_custom-{{user `image_id`}}"],
+      "only": ["vb_plain"],
       "output": "../_artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/{{user `template`}}_{{user `image_id`}}.box",
-      "keep_input_artifact": false
+      "keep_input_artifact": true
     },
     {
       "type": "vagrant",
@@ -261,7 +261,6 @@
         "FILE_PATTERN={{user `template`}}_{{user `image_id`}}*",
         "TARGET_FOLDER=../_artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/ovf"
       ],
-      "execute_command": ["bash", "-c", "{{.Vars}} {{.Script}}"],
       "scripts": [
         "../../_common/scripts/sh/helpers/copy_ovf.sh",
         "../../_common/scripts/sh/helpers/cleanup_input_artifact.sh"

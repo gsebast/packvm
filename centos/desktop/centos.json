@@ -112,7 +112,7 @@
     },
     {
       "type": "virtualbox-ovf",
-      "name": "vb_plain_{{user `image_id`}}",
+      "name": "vb_custom-{{user `image_id`}}",
 
       "output_directory": "./{{user `template`}}_{{user `image_id`}}_{{user `vbox_provider`}}",
 
@@ -152,11 +152,10 @@
         "rsync_proxy={{user `rsync_proxy`}}",
         "no_proxy={{user `no_proxy`}}"
       ],
-      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash -ux '{{.Path}}'",
+      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash -eu '{{.Path}}'",
       "expect_disconnect": true,
       "scripts": [
         "scripts/update.sh",
-        "scripts/fix-slow-dns.sh",
         "scripts/sshd.sh",
         "scripts/vagrant.sh",
         "scripts/desktop.sh",
@@ -169,27 +168,26 @@
     },
     {
       "type": "shell",
-      "only": ["vb_plain_{{user `image_id`}}"],
+      "only": ["vb_custom-{{user `image_id`}}"],
       "environment_vars": [
         "HOME_DIR=/home/vagrant"
       ],
-      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash -ux '{{.Path}}'",
+      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash -eu '{{.Path}}'",
       "expect_disconnect": true,
-      "scripts": "{{user `scripts`}}",
-      "inline": ["echo ===> Dummy Script"]
+      "scripts": "{{user `scripts`}}"
     }
   ],
 
   "post-processors": [
     {
       "type": "vagrant",
-      "except": ["vb_plain_{{user `image_id`}}"],
+      "only": ["vb_plain"],
       "output": "../_artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/{{user `template`}}_{{user `image_id`}}.box",
-      "keep_input_artifact": false
+      "keep_input_artifact": true
     },
     {
       "type": "vagrant",
-      "only": ["vb_plain_{{user `image_id`}}"],
+      "only": ["vb_custom-{{user `image_id`}}"],
       "output": "../_artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/{{user `template`}}_{{user `image_id`}}.box",
       "keep_input_artifact": false
     },
@@ -201,7 +199,6 @@
         "FILE_PATTERN={{user `template`}}_{{user `image_id`}}*",
         "TARGET_FOLDER=../_artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/ovf"
       ],
-      "execute_command": ["sh", "-c", "{{.Vars}} {{.Script}}"],
       "scripts": [
         "../../_common/scripts/sh/helpers/copy_ovf.sh",
         "../../_common/scripts/sh/helpers/cleanup_input_artifact.sh"
