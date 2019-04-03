@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="96222ab8-932d-4c2b-9857-0bb3e5460188" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/centos/desktop/centos.json" beforeDir="false" afterPath="$PROJECT_DIR$/centos/desktop/centos.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/centos/server/centos.json" beforeDir="false" afterPath="$PROJECT_DIR$/centos/server/centos.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-16.04-amd64.json" beforeDir="false" afterPath="$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-16.04-amd64.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-18.04-amd64.json" beforeDir="false" afterPath="$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-18.04-amd64.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ubuntu/desktop/ubuntu.json" beforeDir="false" afterPath="$PROJECT_DIR$/ubuntu/desktop/ubuntu.json" afterDir="false" />
@@ -13,25 +16,33 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="testRunner" value="GRADLE" />
+    <option name="delegatedBuild" value="true" />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ubuntu/server/ubuntu.json">
+        <entry file="file://$PROJECT_DIR$/centos/_shared/vars/centos-7.6-x86_64.json">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ubuntu/desktop/ubuntu.json">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-16.04-amd64.json">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="18">
+              <caret line="1" selection-start-line="1" selection-end-line="1" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-18.04-amd64.json">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ubuntu/server/ubuntu.json">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
@@ -45,8 +56,8 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/centos/_shared/vars/centos-7.6-x86_64.json">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ubuntu/desktop/ubuntu.json">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
@@ -64,6 +75,9 @@
       <find>_virtualbox</find>
       <find>-S -E</find>
       <find>7.5</find>
+      <find>vb-custom_{{user `image_id`}}</find>
+      <find>vb_plain_{{user `image_id`}}</find>
+      <find>'{{.Vars}}'</find>
     </findStrings>
     <replaceStrings>
       <replace>image_id</replace>
@@ -75,6 +89,9 @@
       <replace>{{user `vbox_provider`}}</replace>
       <replace>_{{user `vbox_provider`}}</replace>
       <replace>-E -S</replace>
+      <replace>vb-custom_{{user `image_id`}}</replace>
+      <replace>vb_custom-{{user `image_id`}}</replace>
+      <replace>{{.Vars}}</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -88,17 +105,17 @@
         <option value="$PROJECT_DIR$/ubuntu/server/ubuntu_with_powershell.json" />
         <option value="$PROJECT_DIR$/_common/scripts/sh/helpers/copy_ovf.sh" />
         <option value="$PROJECT_DIR$/centos/_shared/vars/centos-7.6-x86_64_extendible.json" />
-        <option value="$PROJECT_DIR$/centos/_shared/vars/centos-7.6-x86_64.json" />
         <option value="$PROJECT_DIR$/centos/server/scripts/networking.sh" />
-        <option value="$PROJECT_DIR$/centos/server/centos.json" />
-        <option value="$PROJECT_DIR$/centos/desktop/centos.json" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-16.04-amd64_extendible.json" />
         <option value="$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-18.04-amd64_extendible.json" />
+        <option value="$PROJECT_DIR$/centos/_shared/vars/centos-7.6-x86_64.json" />
         <option value="$PROJECT_DIR$/ubuntu/server/ubuntu.json" />
+        <option value="$PROJECT_DIR$/centos/server/centos.json" />
+        <option value="$PROJECT_DIR$/centos/desktop/centos.json" />
         <option value="$PROJECT_DIR$/ubuntu/desktop/ubuntu.json" />
-        <option value="$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-16.04-amd64.json" />
         <option value="$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-18.04-amd64.json" />
+        <option value="$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-16.04-amd64.json" />
       </list>
     </option>
   </component>
@@ -113,7 +130,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -125,6 +141,36 @@
               <item name="packvm" type="b2602c69:ProjectViewProjectNode" />
               <item name="packvm" type="462c0819:PsiDirectoryNode" />
               <item name="centos" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="packvm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="packvm" type="462c0819:PsiDirectoryNode" />
+              <item name="centos" type="462c0819:PsiDirectoryNode" />
+              <item name="_artifacts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="packvm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="packvm" type="462c0819:PsiDirectoryNode" />
+              <item name="centos" type="462c0819:PsiDirectoryNode" />
+              <item name="_artifacts" type="462c0819:PsiDirectoryNode" />
+              <item name="virtualbox" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="packvm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="packvm" type="462c0819:PsiDirectoryNode" />
+              <item name="centos" type="462c0819:PsiDirectoryNode" />
+              <item name="_artifacts" type="462c0819:PsiDirectoryNode" />
+              <item name="virtualbox" type="462c0819:PsiDirectoryNode" />
+              <item name="centos-7.6" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="packvm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="packvm" type="462c0819:PsiDirectoryNode" />
+              <item name="centos" type="462c0819:PsiDirectoryNode" />
+              <item name="_artifacts" type="462c0819:PsiDirectoryNode" />
+              <item name="virtualbox" type="462c0819:PsiDirectoryNode" />
+              <item name="centos-7.6" type="462c0819:PsiDirectoryNode" />
+              <item name="ovf" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="packvm" type="b2602c69:ProjectViewProjectNode" />
@@ -160,7 +206,48 @@
               <item name="packvm" type="b2602c69:ProjectViewProjectNode" />
               <item name="packvm" type="462c0819:PsiDirectoryNode" />
               <item name="ubuntu" type="462c0819:PsiDirectoryNode" />
-              <item name=".cache" type="462c0819:PsiDirectoryNode" />
+              <item name="_artifacts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="packvm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="packvm" type="462c0819:PsiDirectoryNode" />
+              <item name="ubuntu" type="462c0819:PsiDirectoryNode" />
+              <item name="_artifacts" type="462c0819:PsiDirectoryNode" />
+              <item name="virtualbox" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="packvm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="packvm" type="462c0819:PsiDirectoryNode" />
+              <item name="ubuntu" type="462c0819:PsiDirectoryNode" />
+              <item name="_artifacts" type="462c0819:PsiDirectoryNode" />
+              <item name="virtualbox" type="462c0819:PsiDirectoryNode" />
+              <item name="ubuntu-16.04" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="packvm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="packvm" type="462c0819:PsiDirectoryNode" />
+              <item name="ubuntu" type="462c0819:PsiDirectoryNode" />
+              <item name="_artifacts" type="462c0819:PsiDirectoryNode" />
+              <item name="virtualbox" type="462c0819:PsiDirectoryNode" />
+              <item name="ubuntu-16.04" type="462c0819:PsiDirectoryNode" />
+              <item name="ovf" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="packvm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="packvm" type="462c0819:PsiDirectoryNode" />
+              <item name="ubuntu" type="462c0819:PsiDirectoryNode" />
+              <item name="_artifacts" type="462c0819:PsiDirectoryNode" />
+              <item name="virtualbox" type="462c0819:PsiDirectoryNode" />
+              <item name="ubuntu-18.04" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="packvm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="packvm" type="462c0819:PsiDirectoryNode" />
+              <item name="ubuntu" type="462c0819:PsiDirectoryNode" />
+              <item name="_artifacts" type="462c0819:PsiDirectoryNode" />
+              <item name="virtualbox" type="462c0819:PsiDirectoryNode" />
+              <item name="ubuntu-18.04" type="462c0819:PsiDirectoryNode" />
+              <item name="ovf" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="packvm" type="b2602c69:ProjectViewProjectNode" />
@@ -192,12 +279,14 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547501410462" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549045211480" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
@@ -252,12 +341,22 @@
       <workItem from="1547408757278" duration="34000" />
       <workItem from="1547408903442" duration="3238000" />
       <workItem from="1547483745476" duration="2363000" />
-      <workItem from="1547493715850" duration="6476000" />
+      <workItem from="1547493715850" duration="7404000" />
+      <workItem from="1549044957732" duration="315000" />
+      <workItem from="1549300253615" duration="64000" />
+      <workItem from="1549301236932" duration="385000" />
+      <workItem from="1549482244305" duration="598000" />
+      <workItem from="1549873510611" duration="278000" />
+      <workItem from="1549912732801" duration="279000" />
+      <workItem from="1551212509774" duration="8910000" />
+      <workItem from="1553893743868" duration="2268000" />
+      <workItem from="1554111591153" duration="95000" />
+      <workItem from="1554318317752" duration="471000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="58636000" />
+    <option name="totallyTimeSpent" value="73227000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -271,8 +370,8 @@
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4989796" visible="true" weight="0.25641027" />
-      <window_info id="Structure" order="1" sideWeight="0.50102043" side_tool="true" weight="0.26495728" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4979592" visible="true" weight="0.2869353" />
+      <window_info id="Structure" order="1" sideWeight="0.5020408" side_tool="true" weight="0.2808303" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
@@ -287,7 +386,7 @@
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" weight="0.32959184" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.327551" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.327551" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32959184" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
@@ -328,15 +427,8 @@
     <entry file="file://$PROJECT_DIR$/ubuntu/server/ubuntu__powershell_post-processor_snippet.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/_common/scripts/sh/helpers/cleanup_input_artifact.sh">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ubuntu/_artifacts/virtualbox/ubuntu-18.04/ovf/ubuntu-18.04-amd64_srv.ovf">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ubuntu/_artifacts/virtualbox/ubuntu-16.04/ovf/ubuntu-16.04-amd64_srv.ovf">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/ubuntu/_artifacts/virtualbox/ubuntu-18.04/ovf/ubuntu-18.04-amd64_srv.ovf" />
+    <entry file="file://$PROJECT_DIR$/ubuntu/_artifacts/virtualbox/ubuntu-16.04/ovf/ubuntu-16.04-amd64_srv.ovf" />
     <entry file="file://$PROJECT_DIR$/ubuntu/desktop/scripts/custom/timezone.sh">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -347,12 +439,6 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/centos/_shared/vars/centos-7.6-x86_64_srv.json" />
-    <entry file="file://$PROJECT_DIR$/_common/scripts/sh/helpers/copy_ovf.sh">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/centos/_artifacts/virtualbox/centos-7.6/ovf/centos-7.6-x86_64_dsk.ovf">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/centos/server/scripts/update.sh">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -384,12 +470,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_common/scripts/sh/metadata.sh">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/_common/scripts/sh/metadata.sh" />
     <entry file="file://$PROJECT_DIR$/_common/scripts/sh/shared/metadata.sh">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -411,13 +492,42 @@
     <entry file="file://$PROJECT_DIR$/_common/scripts/sh/shared/vmware.sh">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/ubuntu/desktop/ubuntu.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-16.04-amd64_extendible.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_common/scripts/sh/helpers/cleanup_input_artifact.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_common/scripts/sh/helpers/copy_ovf.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/centos/_artifacts/virtualbox/centos-7.6/ovf/centos-7.6-x86_64_dsk.ovf">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-18.04-amd64_extendible.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ubuntu/_artifacts/virtualbox/ubuntu-16.04/ovf/ubuntu-16.04-amd64_dsk.ovf">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ubuntu/_artifacts/virtualbox/ubuntu-18.04/ovf/ubuntu-18.04-amd64_dsk.ovf">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/centos/_shared/vars/centos-7.6-x86_64.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-18.04-amd64.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/ubuntu/server/ubuntu.json">
@@ -429,14 +539,15 @@
     <entry file="file://$PROJECT_DIR$/centos/desktop/centos.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/ubuntu/desktop/ubuntu.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-16.04-amd64.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ubuntu/_shared/vars/ubuntu-18.04-amd64.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/centos/_shared/vars/centos-7.6-x86_64.json">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
     </entry>
   </component>
   <component name="masterDetails">
