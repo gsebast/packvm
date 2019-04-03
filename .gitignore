@@ -1,4 +1,5 @@
 .bundle/
+.idea/
 _pre-install/
 
 *.7z
