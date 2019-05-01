@@ -28,6 +28,9 @@
     "iso_checksum": "6d44331cc4f6c506c7bbe9feb8468fad6c51a88ca1393ca6b8b486ea04bec3c1",
     "iso_checksum_type": "sha256",
 
+    "ovf_format": "ova",
+    "ovf_file": "some_valid_ovf_file",
+
     "http_root_context": "../_shared/http",
     "http_pMin": "9001",
     "http_pMax": "9009",
@@ -60,7 +63,8 @@
       "name": "vb_plain",
 
       "output_directory": "./{{user `template`}}_{{user `image_id`}}_{{user `vbox_provider`}}",
-      
+      "format": "{{user `ovf_format`}}",
+
       "guest_os_type": "RedHat_64",
       "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
 
@@ -116,7 +120,7 @@
 
       "output_directory": "./{{user `template`}}_{{user `image_id`}}_{{user `vbox_provider`}}",
 
-      "source_path": "../_artifacts/virtualbox/{{user `box_basename`}}/ovf/{{user `ovf_source_file`}}",
+      "source_path": "../_artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/ovf/{{user `ovf_file`}}.{{user `ovf_format`}}",
 
       "vm_name": "{{user `template`}}_{{user `image_id`}}",
 
@@ -200,7 +204,7 @@
         "TARGET_FOLDER=../_artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/ovf"
       ],
       "scripts": [
-        "../../_common/scripts/sh/helpers/copy_ovf.sh",
+        "../../_common/scripts/sh/helpers/copy_ovf_file.sh",
         "../../_common/scripts/sh/helpers/cleanup_input_artifact.sh"
       ]
     }
