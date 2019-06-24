@@ -5,6 +5,7 @@ _pre-install/
 *.7z
 *.box
 *.iso
+*.iso.lock
 *.ova
 *.ovf
 *.vmdk
