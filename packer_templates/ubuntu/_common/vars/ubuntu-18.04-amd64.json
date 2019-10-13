@@ -1,9 +1,9 @@
 {
   "_comment": "Common build definition for a plain Ubuntu Desktop or Server 18.04 LTS 64-bit.",
 
-  "_comment": "Validation Command:  `packer validate -var-file='../_shared/vars/ubuntu-18.04-amd64.json' -only='vb_plain' ubuntu.json`",
+  "_comment": "Validation Command:  `packer validate -var-file='../_common/vars/ubuntu-18.04-amd64.json' -only='vb_plain' ubuntu.json`",
 
-  "_comment": "Build Command:       `packer build -var-file='../_shared/vars/ubuntu-18.04-amd64.json' -only='vb_plain' ubuntu.json`",
+  "_comment": "Build Command:       `packer build -var-file='../_common/vars/ubuntu-18.04-amd64.json' -only='vb_plain' ubuntu.json`",
 
   "box_basename": "ubuntu-18.04",
   "template": "ubuntu-18.04-amd64",
@@ -13,8 +13,8 @@
   "mirror": "http://cdimage.ubuntu.com/ubuntu/releases",
   "mirror_directory": "18.04/release",
 
-  "iso_name": "ubuntu-18.04.2-server-amd64.iso",
-  "iso_checksum": "a2cb36dc010d98ad9253ea5ad5a07fd6b409e3412c48f1860536970b073c98f5",
+  "iso_name": "ubuntu-18.04.3-server-amd64.iso",
+  "iso_checksum": "7d8e0055d663bffa27c1718685085626cb59346e7626ba3d3f476322271f573e",
 
   "cpus": "1",
   "memory": "1024",

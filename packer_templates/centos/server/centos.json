@@ -1,43 +1,44 @@
 {
-  "_comment": "Default build definition shared by all Ubuntu Server builds.",
+  "_comment": "Default build definition shared by all CentOS Server builds.",
 
-  "_comment": "Validation Command:  `packer validate -only='vb_plain' ubuntu.json`",
+  "_comment": "Validation Command:  `packer validate -only='vb_plain' centos.json`",
 
-  "_comment": "Build Command:       `packer build -only='vb_plain' ubuntu.json`",
+  "_comment": "Build Command:       `packer build -only='vb_plain' centos.json`",
 
   "variables": {
-    "box_basename": "ubuntu-16.04",
-    "template": "ubuntu-16.04-amd64",
+    "box_basename": "centos-7.7",
+    "template": "centos-7.7-x86_64",
     "image_id": "srv",
 
     "build_timestamp": "{{isotime \"20060102150405\"}}",
     "git_revision": "__unknown_git_revision__",
     "version": "TIMESTAMP",
 
-    "preseed_path": "preseed.cfg",
+    "ks_path": "7/ks.cfg",
     "headless": "true",
 
-    "boot_command_prefix": "<enter><wait><f6><esc><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+    "boot_command_prefix": "<up><wait><tab>",
 
     "locale": "en_US.UTF-8",
 
-    "mirror": "http://releases.ubuntu.com",
-    "mirror_directory": "16.04.6",
+    "mirror": "http://mirror2.hs-esslingen.de/centos",
+    "mirror_directory": "7.7.1908/isos/x86_64",
 
-    "iso_name": "ubuntu-16.04.6-server-amd64.iso",
-    "iso_checksum": "16afb1375372c57471ea5e29803a89a5a6bd1f6aabea2e5e34ac1ab7eb9786ac",
+    "iso_name": "CentOS-7-x86_64-DVD-1908.iso",
+    "iso_checksum": "9bba3da2876cb9fcf6c28fb636bcbd01832fe6d84cd7445fa58e44e569b3b4fe",
     "iso_checksum_type": "sha256",
 
-    "ovf_format": "ova",
+    "ovf_format": "ovf",
+    "_comment": "\"ovf_format\": \"ova\",",
     "ovf_file": "some_valid_ovf_file",
 
-    "http_root_context": "../_shared/http",
+    "http_root_context": "../_common/http",
     "http_pMin": "9001",
     "http_pMax": "9009",
 
     "cpus": "1",
     "memory": "1024",
-    "disk_size": "16384",
+    "disk_size": "32768",
 
     "username": "vagrant",
     "password": "vagrant",
@@ -59,8 +60,8 @@
       "output_directory": "./{{user `template`}}_{{user `image_id`}}_{{user `vbox_provider`}}",
       "format": "{{user `ovf_format`}}",
 
-      "guest_os_type": "Ubuntu_64",
-      "guest_additions_path": "VBoxGuestAdditions_{{ .Version }}.iso",
+      "guest_os_type": "RedHat_64",
+      "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
 
       "iso_url": "{{user `mirror`}}/{{user `mirror_directory`}}/{{user `iso_name`}}",
       "iso_checksum": "{{user `iso_checksum`}}",
@@ -68,9 +69,9 @@
 
       "vm_name": "{{user `template`}}_{{user `image_id`}}",
       "virtualbox_version_file": ".vbox_version",
-
+      
       "headless": "{{user `headless`}}",
-
+      
       "disk_size": "{{user `disk_size`}}",
       "hard_drive_interface": "sata",
 
@@ -101,39 +102,22 @@
       "boot_wait": "10s",
       "boot_command": [
         "{{user `boot_command_prefix`}}",
-        "/install/vmlinuz<wait>",
-        " auto<wait>",
-        " console-setup/ask_detect=false<wait>",
-        " console-setup/layoutcode=us<wait>",
-        " console-setup/modelcode=pc105<wait>",
-        " debconf/frontend=noninteractive<wait>",
-        " debian-installer={{user `locale`}}<wait>",
-        " fb=false<wait>",
-        " initrd=/install/initrd.gz<wait>",
-        " kbd-chooser/method=us<wait>",
-        " keyboard-configuration/layout=USA<wait>",
-        " keyboard-configuration/variant=USA<wait>",
-        " locale={{user `locale`}}<wait>",
-        " netcfg/get_domain=vm<wait>",
-        " netcfg/get_hostname=vagrant<wait>",
-        " grub-installer/bootdev=/dev/sda<wait>",
-        " noapic<wait>",
-        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{user `preseed_path`}}<wait>",
-        " -- <wait>",
+        " text",
+        " ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{user `ks_path`}}",
         "<enter><wait>"
       ],
 
-      "shutdown_command": "echo '{{user `username`}}' | sudo -S shutdown -P now"
+      "shutdown_command": "echo '{{user `username`}}' | sudo -S /sbin/halt -h -p"
     },
     {
       "type": "virtualbox-ovf",
       "name": "vb_custom-{{user `image_id`}}",
 
-      "output_directory": "./{{user `template`}}_custom-{{user `image_id`}}_{{user `vbox_provider`}}",
+      "output_directory": "./{{user `template`}}_{{user `image_id`}}_{{user `vbox_provider`}}",
 
-      "source_path": "../_artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/ovf/{{user `ovf_file`}}.{{user `ovf_format`}}",
+      "source_path": "../../../builds/artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/ovf/{{user `ovf_file`}}.{{user `ovf_format`}}",
 
-      "vm_name": "{{user `template`}}_custom-{{user `image_id`}}",
+      "vm_name": "{{user `template`}}_{{user `image_id`}}",
 
       "headless": "{{user `headless`}}",
 
@@ -142,7 +126,7 @@
       "ssh_port": 22,
       "ssh_wait_timeout": "3600s",
 
-      "shutdown_command": "echo '{{user `username`}}' | sudo -S shutdown -P now"
+      "shutdown_command": "echo '{{user `username`}}' | sudo -S /sbin/halt -h -p"
     }
   ],
 
@@ -157,16 +141,14 @@
       "expect_disconnect": true,
       "scripts": [
         "scripts/update.sh",
-        "../../_common/scripts/sh/shared/sshd.sh",
+        "../../_common/scripts/sshd.sh",
         "scripts/networking.sh",
-        "scripts/sudoers.sh",
-        "scripts/vagrant.sh",
-        "../../_common/scripts/sh/shared/virtualbox.sh",
-        "scripts/vmware.sh",
-        "../../_common/scripts/sh/shared/parallels.sh",
-        "scripts/hyperv.sh",
+        "../../_common/scripts/vagrant.sh",
+        "../../_common/scripts/virtualbox.sh",
+        "../../_common/scripts/vmware.sh",
+        "../../_common/scripts/parallels.sh",
         "scripts/cleanup.sh",
-        "../../_common/scripts/sh/shared/minimize.sh"
+        "../../_common/scripts/minimize.sh"
       ]
     },
     {
@@ -185,13 +167,13 @@
     {
       "type": "vagrant",
       "only": ["vb_plain"],
-      "output": "../_artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/{{user `template`}}_{{user `image_id`}}.box",
+      "output": "../../../builds/artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/{{user `template`}}_{{user `image_id`}}.box",
       "keep_input_artifact": true
     },
     {
       "type": "vagrant",
       "only": ["vb_custom-{{user `image_id`}}"],
-      "output": "../_artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/{{user `template`}}_custom-{{user `image_id`}}.box",
+      "output": "../../../builds/artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/{{user `template`}}_{{user `image_id`}}.box",
       "keep_input_artifact": false
     },
     {
@@ -200,11 +182,11 @@
       "environment_vars": [
         "SOURCE_FOLDER=./{{user `template`}}_{{user `image_id`}}_{{user `vbox_provider`}}",
         "FILE_PATTERN={{user `template`}}_{{user `image_id`}}*",
-        "TARGET_FOLDER=../_artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/ovf"
+        "TARGET_FOLDER=../../../builds/artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/{{user `ovf_format`}}"
       ],
       "scripts": [
-        "../../_common/scripts/sh/helpers/copy_ovf_file.sh",
-        "../../_common/scripts/sh/helpers/cleanup_input_artifact.sh"
+        "../../_common/helpers/sh/copy_ovf_file.sh",
+        "../../_common/helpers/sh/cleanup_input_artifact.sh"
       ]
     }
   ]

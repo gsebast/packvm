@@ -1,5 +1,5 @@
 {
-  "_comment": "Default build definition shared by all Ubuntu Desktop builds.",
+  "_comment": "Default build definition shared by all Ubuntu Server builds.",
 
   "_comment": "Validation Command:  `packer validate -only='vb_plain' ubuntu.json`",
 
@@ -8,7 +8,7 @@
   "variables": {
     "box_basename": "ubuntu-16.04",
     "template": "ubuntu-16.04-amd64",
-    "image_id": "dsk",
+    "image_id": "srv",
 
     "build_timestamp": "{{isotime \"20060102150405\"}}",
     "git_revision": "__unknown_git_revision__",
@@ -28,16 +28,17 @@
     "iso_checksum": "16afb1375372c57471ea5e29803a89a5a6bd1f6aabea2e5e34ac1ab7eb9786ac",
     "iso_checksum_type": "sha256",
 
-    "ovf_format": "ova",
+    "ovf_format": "ovf",
+    "_comment": "\"ovf_format\": \"ova\",",
     "ovf_file": "some_valid_ovf_file",
 
-    "http_root_context": "../_shared/http",
+    "http_root_context": "../_common/http",
     "http_pMin": "9001",
     "http_pMax": "9009",
 
     "cpus": "1",
     "memory": "1024",
-    "disk_size": "16384",
+    "disk_size": "32768",
 
     "username": "vagrant",
     "password": "vagrant",
@@ -131,7 +132,7 @@
 
       "output_directory": "./{{user `template`}}_custom-{{user `image_id`}}_{{user `vbox_provider`}}",
 
-      "source_path": "../_artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/ovf/{{user `ovf_file`}}.{{user `ovf_format`}}",
+      "source_path": "../../../builds/artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/ovf/{{user `ovf_file`}}.{{user `ovf_format`}}",
 
       "vm_name": "{{user `template`}}_custom-{{user `image_id`}}",
 
@@ -151,83 +152,23 @@
       "type": "shell",
       "only": ["vb_plain"],
       "environment_vars": [
-        "HOME_DIR=/home/vagrant",
-
-        "CLEANUP_PAUSE={{user `cleanup_pause`}}",
-        "DESKTOP={{user `desktop`}}",
-        "UPDATE={{user `update`}}",
-        "INSTALL_VAGRANT_KEY={{user `install_vagrant_key`}}",
-        "SSH_USERNAME={{user `username`}}",
-        "SSH_PASSWORD={{user `password`}}",
-
-        "ftp_proxy={{user `ftp_proxy`}}",
-        "http_proxy={{user `http_proxy`}}",
-        "https_proxy={{user `https_proxy`}}",
-        "rsync_proxy={{user `rsync_proxy`}}",
-        "no_proxy={{user `no_proxy`}}"
+        "HOME_DIR=/home/vagrant"
       ],
-      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash -u '{{.Path}}'",
+      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S sh -eu '{{.Path}}'",
       "expect_disconnect": true,
       "scripts": [
         "scripts/update.sh",
-        "scripts/desktop.sh",
-        "scripts/custom/timezone.sh"
-      ]
-    },
-    {
-      "type": "file",
-      "only": ["vb_plain"],
-      "source": "scripts/custom/input_source.sh",
-      "destination": "/tmp/input_source.sh"
-    },
-    {
-      "type": "shell",
-      "only": ["vb_plain"],
-      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash -u '{{.Path}}'",
-      "inline": ["mv /tmp/input_source.sh /sbin/input_source.sh && chmod 755 /sbin/input_source.sh"]
-    },
-    {
-      "type": "file",
-      "only": ["vb_plain"],
-      "source": "scripts/custom/input_source.desktop",
-      "destination": "/tmp/input_source.desktop"
-    },
-    {
-      "type": "shell",
-      "only": ["vb_plain"],
-      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash -u '{{.Path}}'",
-      "inline": ["mv /tmp/input_source.desktop /etc/xdg/autostart/input_source.desktop"]
-    },
-    {
-      "type": "shell",
-      "only": ["vb_plain"],
-      "environment_vars": [
-        "HOME_DIR=/home/vagrant",
-
-        "CLEANUP_PAUSE={{user `cleanup_pause`}}",
-        "DESKTOP={{user `desktop`}}",
-        "UPDATE={{user `update`}}",
-        "INSTALL_VAGRANT_KEY={{user `install_vagrant_key`}}",
-        "SSH_USERNAME={{user `username`}}",
-        "SSH_PASSWORD={{user `password`}}",
-
-        "ftp_proxy={{user `ftp_proxy`}}",
-        "http_proxy={{user `http_proxy`}}",
-        "https_proxy={{user `https_proxy`}}",
-        "rsync_proxy={{user `rsync_proxy`}}",
-        "no_proxy={{user `no_proxy`}}"
-      ],
-      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash -u '{{.Path}}'",
-      "expect_disconnect": true,
-      "scripts": [
+        "../../_common/scripts/motd.sh",
+        "../../_common/scripts/sshd.sh",
+        "scripts/networking.sh",
+        "scripts/sudoers.sh",
         "scripts/vagrant.sh",
-        "scripts/sshd.sh",
+        "../../_common/scripts/virtualbox.sh",
         "scripts/vmware.sh",
-        "scripts/virtualbox.sh",
-        "scripts/parallels.sh",
-        "scripts/motd.sh",
-        "scripts/minimize.sh",
-        "scripts/cleanup.sh"
+        "../../_common/scripts/parallels.sh",
+        "scripts/hyperv.sh",
+        "scripts/cleanup.sh",
+        "../../_common/scripts/minimize.sh"
       ]
     },
     {
@@ -236,7 +177,7 @@
       "environment_vars": [
         "HOME_DIR=/home/vagrant"
       ],
-      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash -u '{{.Path}}'",
+      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S sh -eu '{{.Path}}'",
       "expect_disconnect": true,
       "scripts": "{{user `scripts`}}"
     }
@@ -246,13 +187,13 @@
     {
       "type": "vagrant",
       "only": ["vb_plain"],
-      "output": "../_artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/{{user `template`}}_{{user `image_id`}}.box",
+      "output": "../../../builds/artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/{{user `template`}}_{{user `image_id`}}.box",
       "keep_input_artifact": true
     },
     {
       "type": "vagrant",
       "only": ["vb_custom-{{user `image_id`}}"],
-      "output": "../_artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/{{user `template`}}_custom-{{user `image_id`}}.box",
+      "output": "../../../builds/artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/{{user `template`}}_custom-{{user `image_id`}}.box",
       "keep_input_artifact": false
     },
     {
@@ -261,11 +202,11 @@
       "environment_vars": [
         "SOURCE_FOLDER=./{{user `template`}}_{{user `image_id`}}_{{user `vbox_provider`}}",
         "FILE_PATTERN={{user `template`}}_{{user `image_id`}}*",
-        "TARGET_FOLDER=../_artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/ovf"
+        "TARGET_FOLDER=../../../builds/artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/{{user `ovf_format`}}"
       ],
       "scripts": [
-        "../../_common/scripts/sh/helpers/copy_ovf_file.sh",
-        "../../_common/scripts/sh/helpers/cleanup_input_artifact.sh"
+        "../../_common/helpers/sh/copy_ovf_file.sh",
+        "../../_common/helpers/sh/cleanup_input_artifact.sh"
       ]
     }
   ]

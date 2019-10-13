@@ -6,15 +6,15 @@
   "_comment": "Build Command:       `packer build -only='vb_plain' centos.json`",
 
   "variables": {
-    "box_basename": "centos-7.6",
-    "template": "centos-7.6-x86_64",
-    "image_id": "srv",
+    "box_basename": "centos-7.7",
+    "template": "centos-7.7-x86_64",
+    "image_id": "dsk",
 
     "build_timestamp": "{{isotime \"20060102150405\"}}",
     "git_revision": "__unknown_git_revision__",
     "version": "TIMESTAMP",
 
-    "ks_path": "7/ks.cfg",
+    "ks_path": "7/ks_desktop.cfg",
     "headless": "true",
 
     "boot_command_prefix": "<up><wait><tab>",
@@ -22,22 +22,23 @@
     "locale": "en_US.UTF-8",
 
     "mirror": "http://mirror2.hs-esslingen.de/centos",
-    "mirror_directory": "7.6.1810/isos/x86_64",
+    "mirror_directory": "7.7.1908/isos/x86_64",
 
-    "iso_name": "CentOS-7-x86_64-DVD-1810.iso",
-    "iso_checksum": "6d44331cc4f6c506c7bbe9feb8468fad6c51a88ca1393ca6b8b486ea04bec3c1",
+    "iso_name": "CentOS-7-x86_64-DVD-1908.iso",
+    "iso_checksum": "9bba3da2876cb9fcf6c28fb636bcbd01832fe6d84cd7445fa58e44e569b3b4fe",
     "iso_checksum_type": "sha256",
 
-    "ovf_format": "ova",
+    "ovf_format": "ovf",
+    "_comment": "\"ovf_format\": \"ova\",",
     "ovf_file": "some_valid_ovf_file",
 
-    "http_root_context": "../_shared/http",
+    "http_root_context": "../_common/http",
     "http_pMin": "9001",
     "http_pMax": "9009",
 
     "cpus": "1",
     "memory": "1024",
-    "disk_size": "16384",
+    "disk_size": "32768",
 
     "username": "vagrant",
     "password": "vagrant",
@@ -48,7 +49,13 @@
     "http_proxy": "{{env `http_proxy`}}",
     "https_proxy": "{{env `https_proxy`}}",
     "rsync_proxy": "{{env `rsync_proxy`}}",
-    "no_proxy": "{{env `no_proxy`}}"
+    "no_proxy": "{{env `no_proxy`}}",
+
+    "desktop": "true",
+    "update": "true",
+    "install_vagrant_key": "true",
+    "cleanup_pause": "",
+    "cleanup_build_tools": "true"
   },
 
   "builders": [
@@ -114,7 +121,7 @@
 
       "output_directory": "./{{user `template`}}_{{user `image_id`}}_{{user `vbox_provider`}}",
 
-      "source_path": "../_artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/ovf/{{user `ovf_file`}}.{{user `ovf_format`}}",
+      "source_path": "../../../builds/artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/ovf/{{user `ovf_file`}}.{{user `ovf_format`}}",
 
       "vm_name": "{{user `template`}}_{{user `image_id`}}",
 
@@ -134,20 +141,34 @@
       "type": "shell",
       "only": ["vb_plain"],
       "environment_vars": [
-        "HOME_DIR=/home/vagrant"
+        "HOME_DIR=/home/vagrant",
+
+        "CLEANUP_PAUSE={{user `cleanup_pause`}}",
+        "CLEANUP_BUILD_TOOLS={{user `cleanup_build_tools`}}",
+        "DESKTOP={{user `desktop`}}",
+        "UPDATE={{user `update`}}",
+        "INSTALL_VAGRANT_KEY={{user `install_vagrant_key`}}",
+        "SSH_USERNAME={{user `username`}}",
+        "SSH_PASSWORD={{user `password`}}",
+
+        "ftp_proxy={{user `ftp_proxy`}}",
+        "http_proxy={{user `http_proxy`}}",
+        "https_proxy={{user `https_proxy`}}",
+        "rsync_proxy={{user `rsync_proxy`}}",
+        "no_proxy={{user `no_proxy`}}"
       ],
-      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S sh -eu '{{.Path}}'",
+      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash -eu '{{.Path}}'",
       "expect_disconnect": true,
       "scripts": [
         "scripts/update.sh",
-        "../../_common/scripts/sh/shared/sshd.sh",
-        "scripts/networking.sh",
-        "../../_common/scripts/sh/shared/vagrant.sh",
-        "../../_common/scripts/sh/shared/virtualbox.sh",
-        "../../_common/scripts/sh/shared/vmware.sh",
-        "../../_common/scripts/sh/shared/parallels.sh",
-        "scripts/cleanup.sh",
-        "../../_common/scripts/sh/shared/minimize.sh"
+        "scripts/sshd.sh",
+        "scripts/vagrant.sh",
+        "scripts/desktop.sh",
+        "scripts/vmware.sh",
+        "scripts/virtualbox.sh",
+        "scripts/parallels.sh",
+        "scripts/motd.sh",
+        "scripts/cleanup.sh"
       ]
     },
     {
@@ -156,7 +177,7 @@
       "environment_vars": [
         "HOME_DIR=/home/vagrant"
       ],
-      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S sh -eu '{{.Path}}'",
+      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash -eu '{{.Path}}'",
       "expect_disconnect": true,
       "scripts": "{{user `scripts`}}"
     }
@@ -166,13 +187,13 @@
     {
       "type": "vagrant",
       "only": ["vb_plain"],
-      "output": "../_artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/{{user `template`}}_{{user `image_id`}}.box",
+      "output": "../../../builds/artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/{{user `template`}}_{{user `image_id`}}.box",
       "keep_input_artifact": true
     },
     {
       "type": "vagrant",
       "only": ["vb_custom-{{user `image_id`}}"],
-      "output": "../_artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/{{user `template`}}_{{user `image_id`}}.box",
+      "output": "../../../builds/artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/{{user `template`}}_{{user `image_id`}}.box",
       "keep_input_artifact": false
     },
     {
@@ -181,11 +202,11 @@
       "environment_vars": [
         "SOURCE_FOLDER=./{{user `template`}}_{{user `image_id`}}_{{user `vbox_provider`}}",
         "FILE_PATTERN={{user `template`}}_{{user `image_id`}}*",
-        "TARGET_FOLDER=../_artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/ovf"
+        "TARGET_FOLDER=../../../builds/artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/{{user `ovf_format`}}"
       ],
       "scripts": [
-        "../../_common/scripts/sh/helpers/copy_ovf_file.sh",
-        "../../_common/scripts/sh/helpers/cleanup_input_artifact.sh"
+        "../../_common/helpers/sh/copy_ovf_file.sh",
+        "../../_common/helpers/sh/cleanup_input_artifact.sh"
       ]
     }
   ]

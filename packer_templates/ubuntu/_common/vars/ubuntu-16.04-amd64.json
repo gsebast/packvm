@@ -1,9 +1,9 @@
 {
   "_comment": "Variables for building plain Ubuntu Desktop or Server 16.04 LTS 64-bit images.",
 
-  "_comment": "Validation Command:  `packer validate -var-file='../_shared/vars/ubuntu-16.04-amd64.json' -only='vb_plain' ubuntu.json`",
+  "_comment": "Validation Command:  `packer validate -var-file='../_common/vars/ubuntu-16.04-amd64.json' -only='vb_plain' ubuntu.json`",
 
-  "_comment": "Build Command:       `packer build -var-file='../_shared/vars/ubuntu-16.04-amd64.json' -only='vb_plain' ubuntu.json`",
+  "_comment": "Build Command:       `packer build -var-file='../_common/vars/ubuntu-16.04-amd64.json' -only='vb_plain' ubuntu.json`",
 
   "box_basename": "ubuntu-16.04",
   "template": "ubuntu-16.04-amd64",
