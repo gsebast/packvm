@@ -11,3 +11,4 @@ _pre-install/
 *.vmdk
 *.zip
 *snippet*
+port/
