@@ -1,9 +1,9 @@
 {
   "_comment": "Variables for building plain CentOS Desktop or Server 7.7 64-bit images.",
 
-  "_comment": "Validation Command:  `packer validate -var-file='../_shared/vars/centos-7.7-x86_64.json' -only='vb_plain' centos.json`",
+  "_comment": "Validation Command:  `packer validate -var-file='../_common/vars/centos-7.7-x86_64.json' -only='vb_plain' centos.json`",
 
-  "_comment": "Build Command:       `packer build -var-file='../_shared/vars/centos-7.7-x86_64.json' -only='vb_plain' centos.json`",
+  "_comment": "Build Command:       `packer build -var-file='../_common/vars/centos-7.7-x86_64.json' -only='vb_plain' centos.json`",
 
   "box_basename": "centos-7.7",
   "template": "centos-7.7-x86_64",
@@ -11,10 +11,10 @@
   "boot_command_prefix": "<up><wait><tab>",
 
   "mirror": "http://mirror2.hs-esslingen.de/centos",
-  "mirror_directory": "7.7.1810/isos/x86_64",
+  "mirror_directory": "7.7.1908/isos/x86_64",
 
-  "iso_name": "CentOS-7-x86_64-DVD-1810.iso",
-  "iso_checksum": "6d44331cc4f6c506c7bbe9feb8468fad6c51a88ca1393ca6b8b486ea04bec3c1",
+  "iso_name": "CentOS-7-x86_64-DVD-1908.iso",
+  "iso_checksum": "9bba3da2876cb9fcf6c28fb636bcbd01832fe6d84cd7445fa58e44e569b3b4fe",
 
   "cpus": "1",
   "memory": "1024",

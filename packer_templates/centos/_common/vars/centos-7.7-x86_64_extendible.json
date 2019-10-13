@@ -3,9 +3,9 @@
 
   "_comment": "Pre-requisite is `centos-7.7-x86_64.json` having been built successfully, which creates and persists an OVF package used by this build.",
 
-  "_comment": "Validation Command:  `packer validate -var-file='../_shared/vars/centos-7.7-x86_64_extendible.json' -var 'ovf_file=<name_of_ovf_file_to_use>' -var 'image_id=<unique_image_id>' -only='vb_plain_{image_id}' centos.json`",
+  "_comment": "Validation Command:  `packer validate -var-file='../_common/vars/centos-7.7-x86_64_extendible.json' -var 'ovf_file=<name_of_ovf_file_to_use>' -var 'image_id=<unique_image_id>' -only='vb_plain_{image_id}' centos.json`",
 
-  "_comment": "Build Command:       `packer build -var-file='../_shared/vars/centos-7.7-x86_64_extendible.json' -var 'ovf_file=<name_of_ovf_file_to_use>' -var 'image_id=<unique_image_id>' -only='vb_plain_{image_id}' centos.json`",
+  "_comment": "Build Command:       `packer build -var-file='../_common/vars/centos-7.7-x86_64_extendible.json' -var 'ovf_file=<name_of_ovf_file_to_use>' -var 'image_id=<unique_image_id>' -only='vb_plain_{image_id}' centos.json`",
 
   "box_basename": "centos-7.7",
   "template": "centos-7.7-x86_64",
