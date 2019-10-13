@@ -1,0 +1,30 @@
+{
+  "_comment": "Variables for building plain CentOS Desktop or Server 8.0 64-bit images.",
+
+  "_comment": "Validation Command:  `packer validate -var-file='../_common/vars/centos-8.0-x86_64.json' -only='vb_plain' centos.json`",
+
+  "_comment": "Build Command:       `packer build -var-file='../_common/vars/centos-8.0-x86_64.json' -only='vb_plain' centos.json`",
+
+  "box_basename": "centos-8.0",
+  "template": "centos-8.0-x86_64",
+
+  "ks_path": "8/ks.cfg",
+
+  "boot_command_prefix": "<up><wait><tab>",
+
+  "mirror": "http://mirror2.hs-esslingen.de/centos",
+  "mirror_directory": "8.0.1905/isos/x86_64",
+
+  "iso_name": "CentOS-8-x86_64-1905-dvd1.iso",
+  "iso_checksum": "ea17ef71e0df3f6bf1d4bf1fc25bec1a76d1f211c115d39618fe688be34503e8",
+
+  "cpus": "1",
+  "memory": "1024",
+  "disk_size": "16384",
+
+  "ftp_proxy": "",
+  "http_proxy": "",
+  "https_proxy": "",
+  "rsync_proxy": "",
+  "no_proxy": ""
+}
