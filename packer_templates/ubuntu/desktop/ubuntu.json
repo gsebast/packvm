@@ -50,7 +50,12 @@
     "http_proxy": "{{env `http_proxy`}}",
     "https_proxy": "{{env `https_proxy`}}",
     "rsync_proxy": "{{env `rsync_proxy`}}",
-    "no_proxy": "{{env `no_proxy`}}"
+    "no_proxy": "{{env `no_proxy`}}",
+
+    "desktop": "true",
+    "update": "true",
+    "install_vagrant_key": "true",
+    "cleanup_pause": ""
   },
 
   "builders": [
@@ -168,7 +173,7 @@
         "rsync_proxy={{user `rsync_proxy`}}",
         "no_proxy={{user `no_proxy`}}"
       ],
-      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash -u '{{.Path}}'",
+      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
       "expect_disconnect": true,
       "scripts": [
         "scripts/update.sh",
@@ -185,7 +190,7 @@
     {
       "type": "shell",
       "only": ["vb_plain"],
-      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash -u '{{.Path}}'",
+      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
       "inline": ["mv /tmp/input_source.sh /sbin/input_source.sh && chmod 755 /sbin/input_source.sh"]
     },
     {
@@ -197,7 +202,7 @@
     {
       "type": "shell",
       "only": ["vb_plain"],
-      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash -u '{{.Path}}'",
+      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
       "inline": ["mv /tmp/input_source.desktop /etc/xdg/autostart/input_source.desktop"]
     },
     {
@@ -207,6 +212,7 @@
         "HOME_DIR=/home/vagrant",
 
         "CLEANUP_PAUSE={{user `cleanup_pause`}}",
+        "DEBIAN_FRONTEND=noninteractive",
         "DESKTOP={{user `desktop`}}",
         "UPDATE={{user `update`}}",
         "INSTALL_VAGRANT_KEY={{user `install_vagrant_key`}}",
@@ -219,7 +225,7 @@
         "rsync_proxy={{user `rsync_proxy`}}",
         "no_proxy={{user `no_proxy`}}"
       ],
-      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash -u '{{.Path}}'",
+      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
       "expect_disconnect": true,
       "scripts": [
         "scripts/vagrant.sh",
@@ -238,7 +244,7 @@
       "environment_vars": [
         "HOME_DIR=/home/vagrant"
       ],
-      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash -u '{{.Path}}'",
+      "execute_command": "echo '{{user `username`}}' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
       "expect_disconnect": true,
       "scripts": "{{user `scripts`}}"
     }
