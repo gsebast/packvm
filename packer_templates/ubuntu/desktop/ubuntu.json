@@ -13,7 +13,7 @@
     "version": "TIMESTAMP",
 
     "preseed_path": "preseed.cfg",
-    "_comment": "\"preseed_path\": \"preseed_desktop.cfg\",",
+    "_comment_preseed_path": "\"preseed_path\": \"preseed_desktop.cfg\",",
     "headless": "true",
 
     "boot_command_prefix": "<enter><wait><f6><esc><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
@@ -28,7 +28,7 @@
     "iso_checksum_type": "sha256",
 
     "ovf_format": "ovf",
-    "_comment": "\"ovf_format\": \"ova\",",
+    "_comment_ovf_format": "\"ovf_format\": \"ova\",",
     "ovf_file": "some_valid_ovf_file",
 
     "http_root_context": "../_common/http",
