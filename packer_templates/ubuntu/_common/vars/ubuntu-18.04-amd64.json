@@ -1,9 +1,7 @@
 {
-  "_comment": "Common build definition for a plain Ubuntu Desktop or Server 18.04 LTS 64-bit.",
-
-  "_comment": "Validation Command:  `packer validate -var-file='../_common/vars/ubuntu-18.04-amd64.json' -only='vb_plain' ubuntu.json`",
-
-  "_comment": "Build Command:       `packer build -var-file='../_common/vars/ubuntu-18.04-amd64.json' -only='vb_plain' ubuntu.json`",
+  "_description":       "Common build definition for a plain Ubuntu Desktop or Server 18.04 LTS 64-bit.",
+  "_validationExample": "Validation Command:  `packer validate -var-file='../_common/vars/ubuntu-18.04-amd64.json' -only='vb_plain' ubuntu.json`",
+  "_buildExample":      "Build Command:       `packer build -var-file='../_common/vars/ubuntu-18.04-amd64.json' -only='vb_plain' ubuntu.json`",
 
   "box_basename": "ubuntu-18.04",
   "template": "ubuntu-18.04-amd64",

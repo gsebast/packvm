@@ -1,9 +1,7 @@
 {
-  "_comment": "Default build definition shared by all CentOS Server builds.",
-
-  "_comment": "Validation Command:  `packer validate -only='vb_plain' centos.json`",
-
-  "_comment": "Build Command:       `packer build -only='vb_plain' centos.json`",
+  "_description":       "Default build definition shared by all CentOS Server builds.",
+  "_validationExample": "Validation Command:  `packer validate -only='vb_plain' centos.json`",
+  "_buildExample":      "Build Command:       `packer build -only='vb_plain' centos.json`",
 
   "variables": {
     "box_basename": "centos-7.7",

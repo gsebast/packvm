@@ -1,9 +1,7 @@
 {
-  "_comment": "Default build definition shared by all Ubuntu Server builds.",
-
-  "_comment": "Validation Command:  `packer validate -only='vb_plain' ubuntu.json`",
-
-  "_comment": "Build Command:       `packer build -only='vb_plain' ubuntu.json`",
+  "_description":       "Default build definition shared by all Ubuntu Server builds.",
+  "_validationExample": "Validation Command:  `packer validate -only='vb_plain' ubuntu.json`",
+  "_buildExample":      "Build Command:       `packer build -only='vb_plain' ubuntu.json`",
 
   "variables": {
     "box_basename": "ubuntu-16.04",
