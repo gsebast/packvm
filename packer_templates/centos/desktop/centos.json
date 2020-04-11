@@ -88,7 +88,7 @@
       "ssh_username": "{{user `username`}}",
       "ssh_password": "{{user `password`}}",
       "ssh_port": 22,
-      "ssh_wait_timeout": "3600s",
+      "ssh_timeout": "3600s",
 
       "vboxmanage": [
         [
@@ -130,7 +130,7 @@
       "ssh_username": "{{user `username`}}",
       "ssh_password": "{{user `password`}}",
       "ssh_port": 22,
-      "ssh_wait_timeout": "3600s",
+      "ssh_timeout": "3600s",
 
       "shutdown_command": "echo '{{user `username`}}' | sudo -S /sbin/halt -h -p"
     }
@@ -167,7 +167,7 @@
         "scripts/vmware.sh",
         "scripts/virtualbox.sh",
         "scripts/parallels.sh",
-        "scripts/motd.sh",
+        "scripts/custom/motd.sh",
         "scripts/cleanup.sh"
       ]
     },
