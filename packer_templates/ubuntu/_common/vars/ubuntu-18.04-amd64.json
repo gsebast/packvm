@@ -8,8 +8,8 @@
 
   "boot_command_prefix": "<esc><esc><enter><wait>",
 
-  "mirror": "http://cdimage.ubuntu.com/ubuntu/releases",
-  "mirror_directory": "18.04/release",
+  "mirror": "http://cdimage.ubuntu.com",
+  "mirror_directory": "ubuntu/releases/18.04/release",
 
   "iso_name": "ubuntu-18.04.4-server-amd64.iso",
   "iso_checksum": "e2ecdace33c939527cbc9e8d23576381c493b071107207d2040af72595f8990b",
