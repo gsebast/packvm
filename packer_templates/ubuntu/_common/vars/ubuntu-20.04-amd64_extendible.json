@@ -1,0 +1,11 @@
+{
+  "_description":       "Variables for building Ubuntu Desktop or Server 20.04 LTS 64-bit images which are to be further extended, e.g. with pre-installed software or configurations.",
+  "_pre-requisite":     "Pre-requisite is `ubuntu-20.04-amd64.json` having been built successfully, which creates and persists an OVF package used by this build.",
+  "_validationExample": "Validation Command:  `packer validate -var-file='../_common/vars/ubuntu-20.04-amd64_extendible.json' -var 'ovf_file=<name_of_ovf_file_to_use>' -var 'image_id=<unique_image_id>' -only='vb_plain_{image_id}' ubuntu.json`",
+  "_buildExample":      "Build Command:       `packer build -var-file='../_common/vars/ubuntu-20.04-amd64_extendible.json' -var 'ovf_file=<name_of_ovf_file_to_use>' -var 'image_id=<unique_image_id>' -only='vb_plain_{image_id}' ubuntu.json`",
+
+  "box_basename": "ubuntu-20.04",
+  "template": "ubuntu-20.04-amd64",
+
+  "scripts": ""
+}
