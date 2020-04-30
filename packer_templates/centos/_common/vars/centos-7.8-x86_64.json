@@ -1,0 +1,26 @@
+{
+  "_description":       "Variables for building plain CentOS Desktop or Server 7.8 64-bit images.",
+  "_validationExample": "Validation Command:  `packer validate -var-file='../_common/vars/centos-7.8-x86_64.json' -only='vb_plain' centos.json`",
+  "_buildExample":      "Build Command:       `packer build -var-file='../_common/vars/centos-7.8-x86_64.json' -only='vb_plain' centos.json`",
+
+  "box_basename": "centos-7.8",
+  "template": "centos-7.8-x86_64",
+
+  "boot_command_prefix": "<up><wait><tab>",
+
+  "mirror": "http://mirrors.kernel.org/centos",
+  "mirror_directory": "7.8.2003/isos/x86_64",
+
+  "iso_name": "CentOS-7-x86_64-DVD-2003.iso",
+  "iso_checksum": "087a5743dc6fd6706d9b961b8147423ddc029451b938364c760d75440eb7be14",
+
+  "cpus": "1",
+  "memory": "1024",
+  "disk_size": "16384",
+
+  "ftp_proxy": "",
+  "http_proxy": "",
+  "https_proxy": "",
+  "rsync_proxy": "",
+  "no_proxy": ""
+}
