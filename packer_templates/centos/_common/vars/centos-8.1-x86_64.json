@@ -10,11 +10,11 @@
 
   "boot_command_prefix": "<up><wait><tab>",
 
-  "mirror": "http://mirror2.hs-esslingen.de/centos",
-  "mirror_directory": "8.1.1905/isos/x86_64",
+  "mirror": "http://mirrors.kernel.org/centos",
+  "mirror_directory": "8.1.1911/isos/x86_64",
 
-  "iso_name": "CentOS-8-x86_64-1905-dvd1.iso",
-  "iso_checksum": "ea17ef71e0df3f6bf1d4bf1fc25bec1a76d1f211c115d39618fe688be34503e8",
+  "iso_name": "CentOS-8.1.1911-x86_64-dvd1.iso",
+  "iso_checksum": "3ee3f4ea1538e026fff763e2b284a6f20b259d91d1ad5688f5783a67d279423b",
 
   "cpus": "1",
   "memory": "1024",
