@@ -8,8 +8,8 @@
 
   "boot_command_prefix": "<enter><wait><f6><esc><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
 
-  "mirror": "http://cdimage.ubuntu.com",
-  "mirror_directory": "ubuntu/releases/16.04/release",
+  "mirror": "http://releases.ubuntu.com",
+  "mirror_directory": "16.04.6",
 
   "iso_name": "ubuntu-16.04.6-server-amd64.iso",
   "iso_checksum": "16afb1375372c57471ea5e29803a89a5a6bd1f6aabea2e5e34ac1ab7eb9786ac",
