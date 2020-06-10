@@ -9,6 +9,11 @@ if [[ $PACKER_BUILDER_TYPE =~ virtualbox ]]; then
     # kernel-headers-$(uname -r) kernel-devel-$(uname -r) gcc make perl
     # from the install media via ks.cfg
 
+    if grep -q -i "release 8" /etc/redhat-release ; then
+      sudo dnf install -y epel-release
+      sudo dnf install -y dkms kernel-devel kernel-headers gcc make bzip2 perl elfutils-libelf-devel
+    fi
+
     VBOX_VERSION=$(cat $SSH_USER_HOME/.vbox_version)
     mount -o loop $SSH_USER_HOME/VBoxGuestAdditions_$VBOX_VERSION.iso /mnt
     sh /mnt/VBoxLinuxAdditions.run --nox11
