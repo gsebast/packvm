@@ -1,7 +1,9 @@
 {
-  "_description":       "Variables for building plain CentOS Desktop or Server 8.1 64-bit images.",
-  "_validationExample": "Validation Command:  `packer validate -var-file='../_common/vars/centos-8.1-x86_64.json' -only='vb_plain' centos.json`",
-  "_buildExample":      "Build Command:       `packer build -var-file='../_common/vars/centos-8.1-x86_64.json' -only='vb_plain' centos.json`",
+  "_description":           "Variables for building plain CentOS Desktop or Server 8.1 64-bit images.",
+  "_validationExampleSRV":  "Validation Command:  `packer validate -var-file='../_common/vars/centos-8.1-x86_64.json' -only='vb_plain' centos.json`",
+  "_buildExampleSRV":       "Build Command:       `packer build -var-file='../_common/vars/centos-8.1-x86_64.json' -only='vb_plain' centos.json`",
+  "_validationExampleDSK":  "Validation Command:  `packer validate -var-file='../_common/vars/centos-8.1-x86_64.json' -var 'ks_path=8/ks_desktop.cfg' -only='vb_plain' centos.json`",
+  "_buildExampleDSK":       "Build Command:       `packer build -var-file='../_common/vars/centos-8.1-x86_64.json' -var 'ks_path=8/ks_desktop.cfg' -only='vb_plain' centos.json`",
 
   "box_basename": "centos-8.1",
   "template": "centos-8.1-x86_64",
