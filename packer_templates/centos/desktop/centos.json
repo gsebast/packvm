@@ -24,7 +24,6 @@
 
     "iso_name": "CentOS-7-x86_64-DVD-1908.iso",
     "iso_checksum": "9bba3da2876cb9fcf6c28fb636bcbd01832fe6d84cd7445fa58e44e569b3b4fe",
-    "iso_checksum_type": "sha256",
 
     "ovf_format": "ovf",
     "_comment_ovf_format": "\"ovf_format\": \"ova\",",
@@ -69,7 +68,6 @@
 
       "iso_url": "{{ user `mirror` }}/{{ user `mirror_directory` }}/{{ user `iso_name` }}",
       "iso_checksum": "{{ user `iso_checksum` }}",
-      "iso_checksum_type": "{{ user `iso_checksum_type` }}",
 
       "vm_name": "{{ user `template` }}_{{ user `image_id` }}",
       "virtualbox_version_file": ".vbox_version",
