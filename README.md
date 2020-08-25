@@ -117,11 +117,32 @@ packer validate -only='vb_plain' windows-10.json
 packer validate -only='vb_plain' windows-10.json
 ```
 
+##### Windows 2016 64-bit
+```bash
+# Launch from ./packer_templates/windows/server folder
+
+# validate
+packer validate -only='vb_plain' windows-2016_64.json
+
+# build
+packer validate -only='vb_plain' windows-2016_64.json
+```
+
+##### Windows 2019 64-bit
+```bash
+# Launch from ./packer_templates/windows/server folder
+
+# validate
+packer validate -only='vb_plain' windows-2019_64.json
+
+# build
+packer validate -only='vb_plain' windows-2019_64.json
+```
+
 ## TODO - Box Builds
 * Amazon Linux 2 (highest prio)
 * Debian 9,10
 * FreeBSD 11,12
-* Windows Server 2016,2019
 
 ## Maintainers
 Sebastian Gerau ([sg.infotech@protonmail.com](mailto:sg.infotech@protonmail.com))
