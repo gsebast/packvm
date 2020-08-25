@@ -1,0 +1,163 @@
+{
+  "_description":       "Default build definition shared by all Windows 2016 64-bit builds.",
+  "_validationExample": "Validation Command:  `packer validate -only='vb_plain' windows-2016_64.json`",
+  "_buildExample":      "Build Command:       `packer build -only='vb_plain' windows-2016_64.json`",
+
+  "variables": {
+    "box_basename": "windows-2016_64",
+    "template": "windows-2016_64",
+    "image_id": "dsk",
+
+    "headless": "true",
+
+    "guest_additions_mode": "attach",
+
+    "locale": "en_US.UTF-8",
+
+    "iso_url": "https://software-download.microsoft.com/download/pr/Windows_Server_2016_Datacenter_EVAL_en-us_14393_refresh.ISO",
+    "iso_checksum": "772700802951b36c8cb26a61c040b9a8dc3816a3",
+
+    "ovf_format": "ovf",
+    "_comment": "\"ovf_format\": \"ova\",",
+    "ovf_file": "some_valid_ovf_file",
+
+    "common_dir": "../_common",
+    "floppy_dir": "answer_files",
+    "unattended_file_path": "2016/Autounattend.xml",
+    "virtio_win_iso": "~/virtio-win.iso",
+
+    "cpus": "2",
+    "memory": "4096",
+    "vram": "128",
+    "disk_size": "32768",
+
+    "username": "vagrant",
+    "password": "vagrant",
+
+    "vbox_provider": "virtualbox"
+  },
+
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "name": "vb_plain",
+
+      "output_directory": "./{{ user `template` }}_{{ user `image_id` }}_{{ user `vbox_provider` }}",
+      "format": "{{ user `ovf_format` }}",
+
+      "guest_os_type": "Windows2016_64",
+      "guest_additions_mode": "{{ user `guest_additions_mode` }}",
+      "guest_additions_url": "{{ user `guest_additions_url` }}",
+      "guest_additions_path": "C:/users/vagrant/VBoxGuestAdditions.iso",
+
+      "iso_url": "{{ user `iso_url` }}",
+      "iso_checksum": "{{ user `iso_checksum` }}",
+
+      "vm_name": "{{ user `template` }}_{{ user `image_id` }}",
+
+      "headless": "{{ user `headless` }}",
+
+      "cpus": "{{ user `cpus` }}",
+      "memory": "{{ user `memory` }}",
+      "vboxmanage": [
+        ["modifyvm", "{{ .Name }}", "--vram", "{{ user `vram` }}"],
+        ["modifyvm", "{{ .Name }}", "--audio", "none"]
+      ],
+      "iso_interface": "sata",
+      "hard_drive_interface": "sata",
+      "disk_size": "{{ user `disk_size` }}",
+
+      "communicator": "winrm",
+
+      "winrm_username": "{{ user `username` }}",
+      "winrm_password": "{{ user `password` }}",
+      "winrm_timeout": "12h",
+
+      "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
+      "shutdown_timeout": "15m",
+
+      "floppy_files": [
+        "{{ user `floppy_dir` }}/{{ user `unattended_file_path` }}",
+        "{{ user `common_dir` }}/scripts/base_setup.ps1"
+      ]
+    }
+  ],
+
+  "provisioners": [
+    {
+      "type": "chef-solo",
+      "only": ["vb_plain"],
+      "cookbook_paths": ["{{ user `common_dir` }}/cookbooks"],
+      "guest_os_type": "windows",
+      "run_list": [
+        "packer::disable_uac",
+        "packer::disable_restore",
+        "packer::disable_windows_update",
+        "packer::remove_defender",
+        "packer::configure_power",
+        "packer::disable_screensaver"
+      ]
+    },
+    {
+      "type": "windows-restart",
+      "only": ["vb_plain"]
+    },
+    {
+      "type": "chef-solo",
+      "only": ["vb_plain"],
+      "cookbook_paths": ["{{ user `common_dir` }}/cookbooks"],
+      "guest_os_type": "windows",
+      "run_list": [
+        "packer::vm_tools",
+        "packer::features",
+        "packer::enable_file_sharing",
+        "packer::enable_remote_desktop",
+        "packer::ui_tweaks"
+      ]
+    },
+    {
+      "type": "windows-restart",
+      "only": ["vb_plain"]
+    },
+    {
+      "type": "chef-solo",
+      "only": ["vb_plain"],
+      "cookbook_paths": ["{{ user `common_dir` }}/cookbooks"],
+      "guest_os_type": "windows",
+      "run_list": [
+        "packer::cleanup",
+        "packer::defrag"
+      ]
+    },
+    {
+      "type": "powershell",
+      "only": ["vb_plain"],
+      "script": "{{ user `common_dir` }}/scripts/cleanup.ps1",
+      "elevated_user": "vagrant",
+      "elevated_password": "vagrant"
+    }
+  ],
+
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "only": ["vb_plain"],
+      "output": "../../../builds/artifacts/{{user `vbox_provider`}}/{{user `box_basename`}}/{{user `template`}}_{{user `image_id`}}.box",
+      "vagrantfile_template": "{{ user `common_dir` }}/vagrantfile-windows.template",
+      "keep_input_artifact": true
+    },
+    {
+      "type": "shell-local",
+      "only": ["vb_plain"],
+      "environment_vars": [
+        "SOURCE_FOLDER=./{{ user `template` }}_{{ user `image_id` }}_{{ user `vbox_provider` }}",
+        "FILE_PATTERN={{ user `template` }}_{{ user `image_id` }}*",
+        "TARGET_FOLDER=../../../builds/artifacts/{{ user `vbox_provider` }}/{{ user `box_basename` }}/{{ user `ovf_format` }}"
+      ],
+      "scripts": [
+        "../../_common/helpers/sh/copy_ovf_file.sh",
+        "../../_common/helpers/sh/cleanup_input_artifact.sh"
+      ]
+    }
+  ]
+}
