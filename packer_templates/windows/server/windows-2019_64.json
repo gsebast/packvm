@@ -6,7 +6,7 @@
   "variables": {
     "box_basename": "windows-2019_64",
     "template": "windows-2019_64",
-    "image_id": "dsk",
+    "image_id": "srv",
 
     "headless": "true",
 
