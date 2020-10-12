@@ -31,7 +31,11 @@ DISK_USAGE_BEFORE_CLEANUP=$(df -h)
 
 if [[ $CLEANUP_BUILD_TOOLS  =~ true || $CLEANUP_BUILD_TOOLS =~ 1 || $CLEANUP_BUILD_TOOLS =~ yes ]]; then
     echo "==> Removing tools used to build virtual machine drivers"
-    yum -y remove gcc libmpc mpfr cpp kernel-devel kernel-headers
+    if grep -q -i "release 8" /etc/redhat-release ; then
+        yum -y remove gcc libmpc cpp kernel-devel kernel-headers
+    else
+        yum -y remove gcc libmpc mpfr cpp kernel-devel kernel-headers
+    fi
 fi
 
 echo "==> Clean up yum cache of metadata and packages to save space"
