@@ -1,0 +1,11 @@
+{
+  "_description":       "Variables for building CentOS Desktop or Server 8.2-x86 64-bit images which are to be further extended, e.g. with pre-installed software or configurations.",
+  "_pre-requisite":     "Pre-requisite is `centos-8.2-x86_64.json` having been built successfully, which creates and persists an OVF package used by this build.",
+  "_validationExample": "Validation Command:  `packer validate -var-file='../_common/vars/centos-8.2-x86_64_extendible.json' -var 'ovf_file=<name_of_ovf_file_to_use>' -var 'image_id=<unique_image_id>' -only='vb_plain_{image_id}' centos.json`",
+  "_buildExample":      "Build Command:       `packer build -var-file='../_common/vars/centos-8.2-x86_64_extendible.json' -var 'ovf_file=<name_of_ovf_file_to_use>' -var 'image_id=<unique_image_id>' -only='vb_plain_{image_id}' centos.json`",
+
+  "box_basename": "centos-8.2",
+  "template": "centos-8.2-x86_64",
+
+  "scripts": ""
+}

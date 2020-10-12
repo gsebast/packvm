@@ -28,15 +28,15 @@ packer validate -var-file='../_common/vars/centos-7.8-x86_64.json' -only='vb_pla
 packer build -var-file='../_common/vars/centos-7.8-x86_64.json' -only='vb_plain' centos.json
 ```
 
-##### CentOS 8.1
+##### CentOS 8.2
 ```bash
 # Launch from ./packer_templates/centos/server folder
 
 # validate
-packer validate -var-file='../_common/vars/centos-8.1-x86_64.json' -only='vb_plain' centos.json
+packer validate -var-file='../_common/vars/centos-8.2-x86_64.json' -only='vb_plain' centos.json
 
 # build
-packer build -var-file='../_common/vars/centos-8.1-x86_64.json' -only='vb_plain' centos.json
+packer build -var-file='../_common/vars/centos-8.2-x86_64.json' -only='vb_plain' centos.json
 ```
 
 ##### Ubuntu 16.04
@@ -73,15 +73,15 @@ packer build -var-file='../_common/vars/ubuntu-20.04-amd64.json' -only='vb_plain
 ```
 
 ### **Desktop Boxes**
-##### CentOS 8.1
+##### CentOS 8.2
 ```bash
 # Launch from ./packer_templates/centos/server folder
 
 # validate
-packer validate -var-file='../_common/vars/centos-8.1-x86_64.json' -var 'ks_path=8/ks_desktop.cfg' -only='vb_plain' centos.json
+packer validate -var-file='../_common/vars/centos-8.2-x86_64.json' -var 'ks_path=8/ks_desktop.cfg' -only='vb_plain' centos.json
 
 # build
-packer build -var-file='../_common/vars/centos-8.1-x86_64.json' -var 'ks_path=8/ks_desktop.cfg' -only='vb_plain' centos.json
+packer build -var-file='../_common/vars/centos-8.2-x86_64.json' -var 'ks_path=8/ks_desktop.cfg' -only='vb_plain' centos.json
 ```
 
 ##### Ubuntu 18.04
