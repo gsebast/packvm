@@ -11,6 +11,7 @@
     "headless": "true",
 
     "guest_additions_mode": "attach",
+    "guest_additions_url": "",
 
     "locale": "en_US.UTF-8",
 
