@@ -6,6 +6,8 @@
   "box_basename": "centos-7.8",
   "template": "centos-7.8-x86_64",
 
+  "headless": "true",
+
   "boot_command_prefix": "<up><wait><tab>",
 
   "mirror": "http://mirrors.kernel.org/centos",
@@ -13,6 +15,8 @@
 
   "iso_name": "CentOS-7-x86_64-DVD-2003.iso",
   "iso_checksum": "087a5743dc6fd6706d9b961b8147423ddc029451b938364c760d75440eb7be14",
+  "_comment_ovf_format": "\"iso_name\": \"CentOS-7-x86_64-Minimal-2003.iso\",",
+  "_comment_ovf_format": "\"iso_checksum\": \"659691c28a0e672558b003d223f83938f254b39875ee7559d1a4a14c79173193\",",
 
   "cpus": "1",
   "memory": "1024",
