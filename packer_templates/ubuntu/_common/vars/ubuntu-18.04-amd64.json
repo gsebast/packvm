@@ -6,6 +6,8 @@
   "box_basename": "ubuntu-18.04",
   "template": "ubuntu-18.04-amd64",
 
+  "headless": "true",
+
   "boot_command_prefix": "<esc><esc><enter><wait>",
 
   "mirror": "http://cdimage.ubuntu.com",
