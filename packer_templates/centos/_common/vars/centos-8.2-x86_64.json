@@ -9,7 +9,7 @@
   "template": "centos-8.2-x86_64",
 
   "ks_path": "8/ks.cfg",
-  "headless": "false",
+  "headless": "true",
 
   "boot_command_prefix": "<up><wait><tab>",
 
