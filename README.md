@@ -1,7 +1,7 @@
 # packvm
 
-The project is based on the great [Chef/Bento](https://github.com/chef/bento) and 
-[Boxcutter](https://github.com/boxcutter) projects. In comparison to those this 
+The project is based on the great [Chef/Bento](https://github.com/chef/bento) and
+[Boxcutter](https://github.com/boxcutter) projects. In comparison to those this
 project is reduced in scope and adapted to personal preferences.
 
 ## Basic Usage
@@ -143,6 +143,7 @@ packer validate -only='vb_plain' windows-2019_64.json
 * Amazon Linux 2 (highest prio)
 * Debian 9,10
 * FreeBSD 11,12
+* HardenedBSD
 
 ## Maintainers
 Sebastian Gerau ([sg.infotech@protonmail.com](mailto:sg.infotech@protonmail.com))

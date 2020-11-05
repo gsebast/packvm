@@ -4,8 +4,8 @@
   "_buildExample":      "Build Command:       `packer build -only='vb_plain' centos.json`",
 
   "variables": {
-    "box_basename": "centos-7.7",
-    "template": "centos-7.7-x86_64",
+    "box_basename": "centos-7.8",
+    "template": "centos-7.8-x86_64",
     "image_id": "srv",
 
     "build_timestamp": "{{ isotime \"20060102150405\" }}",
@@ -19,11 +19,11 @@
 
     "locale": "en_US.UTF-8",
 
-    "mirror": "http://mirror2.hs-esslingen.de/centos",
-    "mirror_directory": "7.7.1908/isos/x86_64",
+    "mirror": "http://mirrors.kernel.org/centos",
+    "mirror_directory": "7.8.2003/isos/x86_64",
 
-    "iso_name": "CentOS-7-x86_64-DVD-1908.iso",
-    "iso_checksum": "9bba3da2876cb9fcf6c28fb636bcbd01832fe6d84cd7445fa58e44e569b3b4fe",
+    "iso_name": "CentOS-7-x86_64-Minimal-2003.iso",
+    "iso_checksum": "659691c28a0e672558b003d223f83938f254b39875ee7559d1a4a14c79173193",
 
     "ovf_format": "ovf",
     "_comment": "\"ovf_format\": \"ova\",",
@@ -35,7 +35,7 @@
 
     "cpus": "1",
     "memory": "1024",
-    "disk_size": "32768",
+    "disk_size": "16384",
 
     "username": "vagrant",
     "password": "vagrant",

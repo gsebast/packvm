@@ -13,7 +13,6 @@
     "version": "TIMESTAMP",
 
     "preseed_path": "preseed.cfg",
-    "_comment_preseed_path": "\"preseed_path\": \"preseed_desktop.cfg\",",
     "headless": "true",
 
     "boot_command_prefix": "<enter><wait><f6><esc><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
@@ -34,9 +33,9 @@
     "http_pMin": "9001",
     "http_pMax": "9009",
 
-    "cpus": "1",
-    "memory": "1024",
-    "disk_size": "32768",
+    "cpus": "2",
+    "memory": "2048",
+    "disk_size": "16384",
 
     "username": "vagrant",
     "password": "vagrant",
