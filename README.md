@@ -17,15 +17,15 @@ packer build <box_name>.json
 
 ## Builds
 ### **Server Boxes**
-##### CentOS 7.8
+##### CentOS 7.9
 ```bash
 # Launch from ./packer_templates/centos/server folder
 
 # validate
-packer validate -var-file='../_common/vars/centos-7.8-x86_64.json' -only='vb_plain' centos.json
+packer validate -var-file='../_common/vars/centos-7.9-x86_64.json' -only='vb_plain' centos.json
 
 # build
-packer build -var-file='../_common/vars/centos-7.8-x86_64.json' -only='vb_plain' centos.json
+packer build -var-file='../_common/vars/centos-7.9-x86_64.json' -only='vb_plain' centos.json
 ```
 
 ##### CentOS 8.2
