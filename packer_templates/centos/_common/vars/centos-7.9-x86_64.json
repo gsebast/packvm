@@ -13,10 +13,10 @@
   "mirror": "http://mirrors.kernel.org/centos",
   "mirror_directory": "7.9.2009/isos/x86_64",
 
+  "_comment_iso_name": "CentOS-7-x86_64-Minimal-2009.iso",
+  "_comment_iso_checksum": "07b94e6b1a0b0260b94c83d6bb76b26bf7a310dc78d7a9c7432809fb9bc6194a",
   "iso_name": "CentOS-7-x86_64-DVD-2009.iso",
   "iso_checksum": "e33d7b1ea7a9e2f38c8f693215dd85254c3a4fe446f93f563279715b68d07987",
-  "_comment_ovf_format": "\"iso_name\": \"CentOS-7-x86_64-Minimal-2009.iso\",",
-  "_comment_ovf_format": "\"iso_checksum\": \"07b94e6b1a0b0260b94c83d6bb76b26bf7a310dc78d7a9c7432809fb9bc6194a\",",
 
   "cpus": "1",
   "memory": "1024",
