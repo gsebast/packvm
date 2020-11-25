@@ -4,15 +4,15 @@
   "_buildExample":      "Build Command:       `packer build -only='vb_plain' centos.json`",
 
   "variables": {
-    "box_basename": "centos-7.8",
-    "template": "centos-7.8-x86_64",
+    "box_basename": "centos-8.2",
+    "template": "centos-8.2-x86_64",
     "image_id": "dsk",
 
     "build_timestamp": "{{ isotime \"20060102150405\" }}",
     "git_revision": "__unknown_git_revision__",
     "version": "TIMESTAMP",
 
-    "ks_path": "7/ks_desktop.cfg",
+    "ks_path": "8/ks_desktop.cfg",
     "headless": "true",
 
     "boot_command_prefix": "<up><wait><tab>",
@@ -20,10 +20,12 @@
     "locale": "en_US.UTF-8",
 
     "mirror": "http://mirrors.kernel.org/centos",
-    "mirror_directory": "7.8.2003/isos/x86_64",
+    "mirror_directory": "8.2.2004/isos/x86_64",
 
-    "iso_name": "CentOS-7-x86_64-DVD-2003.iso",
-    "iso_checksum": "087a5743dc6fd6706d9b961b8147423ddc029451b938364c760d75440eb7be14",
+    "_comment_iso_name": "CentOS-8.2.2004-x86_64-minimal.iso",
+    "_comment_iso_checksum": "47ab14778c823acae2ee6d365d76a9aed3f95bb8d0add23a06536b58bb5293c0",
+    "iso_name": "CentOS-8.2.2004-x86_64-dvd1.iso",
+    "iso_checksum": "c87a2d81d67bbaeaf646aea5bedd70990078ec252fc52f5a7d65ff609871e255",
 
     "ovf_format": "ovf",
     "_comment_ovf_format": "\"ovf_format\": \"ova\",",
